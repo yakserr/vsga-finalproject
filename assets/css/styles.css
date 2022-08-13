@@ -19,3 +19,13 @@
     background: rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.5);
 }
+
+/* Login Page */
+
+.login-card {
+    margin-top: 6rem;
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 20rem;
+}
