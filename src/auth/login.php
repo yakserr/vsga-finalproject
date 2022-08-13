@@ -1,5 +1,37 @@
 <?php
-include_once 'config.php';
+session_start();
+
+// include config.php
+include_once '../../config.php';
+
+// check if there is a post submit
+if (isset($_POST['submit'])) {
+
+    // get the email and password from the form
+    $email = $_POST['email'];
+    $password = md5($_POST['password']); // the password encrypted with md5
+
+    // check if the email and password is exist/valid in database
+
+    $user_sql = mysqli_query($conn, "SELECT * FROM users  WHERE email = '$email' and password = '$password'");
+    $result_user = mysqli_num_rows($user_sql);
+
+    // validate the email and password
+    if (!$result_user) {
+        // redirect to login page and send the error message if the email and not valid/exist
+        $_SESSION['messages'] = 'Email or Password is not valid, please try again !';
+
+        header("location: $_SERVER[PHP_SELF]");
+    } else {
+        // session data
+        $data = mysqli_fetch_assoc($user_sql);
+        $_SESSION['messages'] = 'Selamat Datang';
+        $_SESSION['name'] = $data['name'];
+
+        // redirect to dashboard page
+        header("location:../dashboard.php");
+    }
+}
 ?>
 
 <!doctype html>
@@ -9,39 +41,62 @@ include_once 'config.php';
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>VSGA Final Project!</title>
+    <title><?= APP_NAME ?></title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <link href="assets/css/styles.css" rel="stylesheet" />
+    <link href="../../assets/css/styles.css" rel="stylesheet" />
 </head>
 
 <body>
     <div class="hero">
         <nav class="navbar navbar-expand-lg navbar-light shadow-lg justify-content-between">
-            <a class="navbar-brand text-light" href="#">Perpus</a>
+            <a class="navbar-brand text-light" href="../../index.php">Perpus</a>
 
-            <div class="navbar-nav">
-                <a class="nav-link text-light" href="src/auth/login.php">Login</a>
-            </div>
         </nav>
 
-        <div class="introduction ml-4 p-1 text-left text-white rounded-lg">
-            <h1>Welcome to Perpus!</h1>
-            <p>a website that provides borrowing, booking and reading books online</p>
-            <div class="search-box">
-                <form class="form-inline ">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search Book" aria-label="Search">
-                    <button class="btn btn-outline-success text-white my-2 my-sm-0" type="submit">Search</button>
-                </form>
+        <div class="login-card ml-5 p-3 text-left rounded-lg">
+            <?php if (isset($_SESSION['messages'])) { ?>
+                <div class="error-message text-white bg-danger p-3 mb-3 rounded-lg" id='error-message'>
+                    <?= $_SESSION['messages'] ?>
+                </div>
+            <?php } ?>
+            <div class="card mx-auto">
+                <div class="card-header text-center">Login</div>
+                <div class="card-body">
+                    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" name="password" id="password">
+                        </div>
+                        <button type="submit" name="submit" value='submit' class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="card-footer"></div>
             </div>
         </div>
+    </div>
 
+    <!--jQuery and Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
-        <!--jQuery and Bootstrap Bundle -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <!-- script -->
+    <script>
+        const elm_error = document.getElementById('error-message');
+        const session_msg = "<?= $_SESSION['messages'] ?>";
+
+        if (session_msg) {
+            setTimeout(() => {
+                elm_error.remove();
+            }, 3000);
+        }
+    </script>
 </body>
 
 </html>
