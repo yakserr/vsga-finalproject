@@ -4,6 +4,11 @@ session_start();
 // include config.php
 include_once '../../config.php';
 
+// if user is logged in, redirect to dashboard
+if (isset($_SESSION['is_logged_in']) === true) {
+    header("location:../dashboard.php");
+}
+
 // check if there is a post submit
 if (isset($_POST['submit'])) {
 
@@ -25,8 +30,11 @@ if (isset($_POST['submit'])) {
     } else {
         // session data
         $data = mysqli_fetch_assoc($user_sql);
-        $_SESSION['messages'] = 'Selamat Datang';
+        $_SESSION['id'] = $data['id'];
         $_SESSION['name'] = $data['name'];
+        $_SESSION['email'] = $data['email'];
+        $_SESSION['is_logged_in'] = true;
+        $_SESSION['messages'] = 'Welcome ' . $_SESSION['name'];
 
         // redirect to dashboard page
         header("location:../dashboard.php");

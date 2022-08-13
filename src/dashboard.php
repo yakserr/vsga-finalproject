@@ -1,6 +1,11 @@
 <?php
 session_start();
 include_once '../config.php';
+
+// if user is not logged in, redirect to login page
+if (isset($_SESSION['is_logged_in']) === false) {
+    header("location:auth/login.php");
+}
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
