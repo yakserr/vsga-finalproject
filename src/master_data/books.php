@@ -1,11 +1,27 @@
 <?php
 session_start();
-include_once '../config.php';
+include_once '../../config.php';
 
 // if user is not logged in, redirect to login page
 if (isset($_SESSION['is_logged_in']) === false) {
-    header("location:auth/login.php");
+    header("location:../auth/login.php");
 }
+
+// query to get all members
+$booksAll = mysqli_query($conn, "SELECT * FROM books");
+
+// pagination
+$limit = 10;
+$page = $_GET['page'] ??  1;
+$start = ($page - 1) * $limit;
+$prev = $page - 1;
+$next = $page + 1;
+
+$total_data = mysqli_num_rows($booksAll);
+$total_page = ceil($total_data / $limit);
+
+$books = mysqli_query($conn, "SELECT * FROM books LIMIT $start , $limit");
+
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -19,7 +35,7 @@ if (isset($_SESSION['is_logged_in']) === false) {
     <title> <?= APP_NAME ?> </title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/Flexy-admin-lite/" />
     <!-- Custom CSS -->
-    <link href="../vendor/admin/css/style.min.css" rel="stylesheet">
+    <link href="../../vendor/admin/css/style.min.css" rel="stylesheet">
 
     <!-- bootstrap -->
 
@@ -43,9 +59,9 @@ if (isset($_SESSION['is_logged_in']) === false) {
                 <div class="navbar-header" data-logobg="skin6">
 
                     <!-- Logo -->
-                    <a class="navbar-brand" href="<?= $_SERVER['PHP_SELF'] ?>">
+                    <a class="navbar-brand" href="../dashboard.php">
                         <span class="logo-text">
-                            <img src="../assets/img/logo2.png" width="150" height="50" alt="homepage" />
+                            <img src="../../assets/img/logo2.png" width="150" height="50" alt="homepage" />
                         </span>
                     </a>
                     <!-- End Logo -->
@@ -78,7 +94,7 @@ if (isset($_SESSION['is_logged_in']) === false) {
                         <!-- User profile and search -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="../vendor/admin/assets/images/users/profile.png" alt="user" class="rounded-circle" width="31">
+                                <img src="../../vendor/admin/assets/images/users/profile.png" alt="user" class="rounded-circle" width="31">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i>
@@ -103,7 +119,7 @@ if (isset($_SESSION['is_logged_in']) === false) {
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="dashboard.php" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door m-2" viewBox="0 0 16 16">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../dashboard.php" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door m-2" viewBox="0 0 16 16">
                                     <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
                                 </svg>
                                 <span class="hide-menu">
@@ -122,7 +138,7 @@ if (isset($_SESSION['is_logged_in']) === false) {
                                     Master Data
                                 </span>
                             </div>
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link m-2" href="master_data/members.php" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link m-2" href="members.php" aria-expanded="false">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z" />
                                 </svg>
@@ -130,7 +146,7 @@ if (isset($_SESSION['is_logged_in']) === false) {
                                     Members
                                 </span>
                             </a>
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link m-2" href="master_data/books.php" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link m-2" href="books.php" aria-expanded="false">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z" />
                                 </svg>
@@ -195,7 +211,7 @@ if (isset($_SESSION['is_logged_in']) === false) {
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mb-0 d-flex align-items-center">
                                 <li class="breadcrumb-item">
-                                    <a href="../index.php" class="link">
+                                    <a href="../../index.php" class="link">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
                                             <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
                                         </svg>
@@ -205,11 +221,17 @@ if (isset($_SESSION['is_logged_in']) === false) {
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
                                         <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
                                     </svg>
-                                    <span class="align-middle text-primary"><a href="dashboard.php">Dashboard</a></span>
+                                    <span class="align-middle text-primary"><a href="../dashboard.php">Dashboard</a></span>
+                                </li>
+                                <li class="active" aria-current="page">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                                        <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                                    </svg>
+                                    <span class="align-middle text-primary"><a href="books.php">Books</a></span>
                                 </li>
                             </ol>
                         </nav>
-                        <h1 class="mb-0 fw-bold">Dashboard</h1>
+                        <h1 class="mb-0 fw-bold">Data Books</h1>
                     </div>
                 </div>
             </div>
@@ -217,106 +239,6 @@ if (isset($_SESSION['is_logged_in']) === false) {
 
             <!-- Container fluid  -->
             <div class="container-fluid">
-
-                <!-- Sales chart -->
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-md-flex align-items-center">
-                                    <div>
-                                        <h4 class="card-title">Sales Summary</h4>
-                                        <h6 class="card-subtitle">Ample admin Vs Pixel admin</h6>
-                                    </div>
-                                    <div class="ms-auto d-flex no-block align-items-center">
-                                        <ul class="list-inline dl d-flex align-items-center m-r-15 m-b-0">
-                                            <li class="list-inline-item d-flex align-items-center text-info"><i class="fa fa-circle font-10 me-1"></i> Ample
-                                            </li>
-                                            <li class="list-inline-item d-flex align-items-center text-primary"><i class="fa fa-circle font-10 me-1"></i> Pixel
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="amp-pxl mt-4" style="height: 350px;">
-                                    <div class="chartist-tooltip"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Weekly Stats</h4>
-                                <h6 class="card-subtitle">Average sales</h6>
-                                <div class="mt-5 pb-3 d-flex align-items-center">
-                                    <span class="btn btn-primary btn-circle d-flex align-items-center">
-                                        <i class="mdi mdi-cart-outline fs-4"></i>
-                                    </span>
-                                    <div class="ms-3">
-                                        <h5 class="mb-0 fw-bold">Top Sales</h5>
-                                        <span class="text-muted fs-6">Johnathan Doe</span>
-                                    </div>
-                                    <div class="ms-auto">
-                                        <span class="badge bg-light text-muted">+68%</span>
-                                    </div>
-                                </div>
-                                <div class="py-3 d-flex align-items-center">
-                                    <span class="btn btn-warning btn-circle d-flex align-items-center">
-                                        <i class="mdi mdi-star-circle fs-4"></i>
-                                    </span>
-                                    <div class="ms-3">
-                                        <h5 class="mb-0 fw-bold">Best Seller</h5>
-                                        <span class="text-muted fs-6">MaterialPro Admin</span>
-                                    </div>
-                                    <div class="ms-auto">
-                                        <span class="badge bg-light text-muted">+68%</span>
-                                    </div>
-                                </div>
-                                <div class="py-3 d-flex align-items-center">
-                                    <span class="btn btn-success btn-circle d-flex align-items-center">
-                                        <i class="mdi mdi-comment-multiple-outline text-white fs-4"></i>
-                                    </span>
-                                    <div class="ms-3">
-                                        <h5 class="mb-0 fw-bold">Most Commented</h5>
-                                        <span class="text-muted fs-6">Ample Admin</span>
-                                    </div>
-                                    <div class="ms-auto">
-                                        <span class="badge bg-light text-muted">+68%</span>
-                                    </div>
-                                </div>
-                                <div class="py-3 d-flex align-items-center">
-                                    <span class="btn btn-info btn-circle d-flex align-items-center">
-                                        <i class="mdi mdi-diamond fs-4 text-white"></i>
-                                    </span>
-                                    <div class="ms-3">
-                                        <h5 class="mb-0 fw-bold">Top Budgets</h5>
-                                        <span class="text-muted fs-6">Sunil Joshi</span>
-                                    </div>
-                                    <div class="ms-auto">
-                                        <span class="badge bg-light text-muted">+15%</span>
-                                    </div>
-                                </div>
-                                <div class="pt-3 d-flex align-items-center">
-                                    <span class="btn btn-danger btn-circle d-flex align-items-center">
-                                        <i class="mdi mdi-content-duplicate fs-4 text-white"></i>
-                                    </span>
-                                    <div class="ms-3">
-                                        <h5 class="mb-0 fw-bold">Best Designer</h5>
-                                        <span class="text-muted fs-6">Nirav Joshi</span>
-                                    </div>
-                                    <div class="ms-auto">
-                                        <span class="badge bg-light text-muted">+90%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sales chart -->
-
-
-                <!-- Table -->
 
                 <div class="row">
                     <!-- column -->
@@ -326,8 +248,8 @@ if (isset($_SESSION['is_logged_in']) === false) {
                                 <!-- title -->
                                 <div class="d-md-flex">
                                     <div>
-                                        <h4 class="card-title">Top Selling Products</h4>
-                                        <h5 class="card-subtitle">Overview of Top Selling Items</h5>
+                                        <h4 class="card-title">Information Books</h4>
+                                        <h5 class="card-subtitle">Overview of detail books</h5>
                                     </div>
                                     <div class="ms-auto">
                                         <div class="dl">
@@ -345,102 +267,42 @@ if (isset($_SESSION['is_logged_in']) === false) {
                                     <table class="table mb-0 table-hover align-middle text-nowrap">
                                         <thead>
                                             <tr>
-                                                <th class="border-top-0">Products</th>
-                                                <th class="border-top-0">License</th>
-                                                <th class="border-top-0">Support Agent</th>
-                                                <th class="border-top-0">Technology</th>
-                                                <th class="border-top-0">Tickets</th>
-                                                <th class="border-top-0">Sales</th>
-                                                <th class="border-top-0">Earnings</th>
+                                                <th class="border-top-0 fw-bolder">Book Code</th>
+                                                <th class="border-top-0 fw-bolder">Title</th>
+                                                <th class="border-top-0 fw-bolder">Author</th>
+                                                <th class="border-top-0 fw-bolder">publisher</th>
+                                                <th class="border-top-0 fw-bolder">Year</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="m-r-10"><a class="btn btn-circle d-flex btn-info text-white">EA</a>
+                                            <?php foreach ($books as $book) { ?>
+                                                <tr>
+                                                    <td>
+                                                        <h4 class="m-b-0 font-16"><?= $book['book_code'] ?></h4>
+                                                    </td>
+                                                    <td>
+                                                        <div class="align-items-center">
+                                                            <div class="">
+                                                                <h4 class="m-b-0"><?= $book['title'] ?></h4>
+                                                            </div>
                                                         </div>
-                                                        <div class="">
-                                                            <h4 class="m-b-0 font-16">Elite Admin</h4>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>Single Use</td>
-                                                <td>John Doe</td>
-                                                <td>
-                                                    <label class="badge bg-danger">Angular</label>
-                                                </td>
-                                                <td>46</td>
-                                                <td>356</td>
-                                                <td>
-                                                    <h5 class="m-b-0">$2850.06</h5>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="m-r-10"><a class="btn btn-circle d-flex btn-orange text-white">MA</a>
-                                                        </div>
-                                                        <div class="">
-                                                            <h4 class="m-b-0 font-16">Monster Admin</h4>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>Single Use</td>
-                                                <td>Venessa Fern</td>
-                                                <td>
-                                                    <label class="badge bg-info">Vue Js</label>
-                                                </td>
-                                                <td>46</td>
-                                                <td>356</td>
-                                                <td>
-                                                    <h5 class="m-b-0">$2850.06</h5>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="m-r-10"><a class="btn btn-circle d-flex btn-success text-white">MP</a>
-                                                        </div>
-                                                        <div class="">
-                                                            <h4 class="m-b-0 font-16">Material Pro Admin</h4>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>Single Use</td>
-                                                <td>John Doe</td>
-                                                <td>
-                                                    <label class="badge bg-success">Bootstrap</label>
-                                                </td>
-                                                <td>46</td>
-                                                <td>356</td>
-                                                <td>
-                                                    <h5 class="m-b-0">$2850.06</h5>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="m-r-10"><a class="btn btn-circle d-flex btn-purple text-white">AA</a>
-                                                        </div>
-                                                        <div class="">
-                                                            <h4 class="m-b-0 font-16">Ample Admin</h4>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>Single Use</td>
-                                                <td>John Doe</td>
-                                                <td>
-                                                    <label class="badge bg-purple">React</label>
-                                                </td>
-                                                <td>46</td>
-                                                <td>356</td>
-                                                <td>
-                                                    <h5 class="m-b-0">$2850.06</h5>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                    <td><?= $book['author'] ?></td>
+                                                    <td><?= $book['publisher'] ?></td>
+                                                    <td><label class="badge bg-success font-16"><?= $book['year'] ?></label></td>
+                                                </tr>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
+                                    <nav aria-label="justify-content-center">
+                                        <ul class="pagination">
+                                            <li class="page-item"><a class="page-link" href="?page=<?= $prev ?>">Previous</a></li>
+                                            <?php for ($i = 1; $i <= $total_page; $i++) { ?>
+                                                <li class="page-item"><a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a></li>
+                                            <?php } ?>
+                                            <li class="page-item"><a class="page-link" href="?page=<?= $next ?>">Next</a></li>
+                                        </ul>
+                                    </nav>
                                 </div>
                             </div>
                         </div>
@@ -465,11 +327,11 @@ if (isset($_SESSION['is_logged_in']) === false) {
 
     </div>
     <!-- All Jquery -->
-    <script src="../vendor/admin/js/jquery.min.js"></script>
+    <script src="../../vendor/admin/js/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="../vendor/admin/js/bootstrap.bundle.min.js"></script>
+    <script src="../../vendor/admin/js/bootstrap.bundle.min.js"></script>
     <!--Custom JavaScript -->
-    <script src="../vendor/admin/js/custom.js"></script>
+    <script src="../../vendor/admin/js/custom.js"></script>
 </body>
 
 </html>
