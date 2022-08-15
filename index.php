@@ -4,10 +4,6 @@ session_start();
 // include config.php
 include_once 'config.php';
 
-// if user is logged in, redirect to dashboard
-if (isset($_SESSION['is_logged_in']) === true) {
-    header("location:src/dashboard.php");
-}
 ?>
 
 <!doctype html>
