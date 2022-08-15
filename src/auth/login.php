@@ -23,10 +23,8 @@ if (isset($_POST['submit'])) {
 
     // validate the email and password
     if (!$result_user) {
-        // redirect to login page and send the error message if the email and not valid/exist
-        $_SESSION['messages'] = 'Email or Password is not valid, please try again !';
 
-        header("location: $_SERVER[PHP_SELF]");
+        header("location: $_SERVER[PHP_SELF]?error=login");
     } else {
         // session data
         $data = mysqli_fetch_assoc($user_sql);
@@ -34,7 +32,6 @@ if (isset($_POST['submit'])) {
         $_SESSION['name'] = $data['name'];
         $_SESSION['email'] = $data['email'];
         $_SESSION['is_logged_in'] = true;
-        $_SESSION['messages'] = 'Welcome ' . $_SESSION['name'];
 
         // redirect to dashboard page
         header("location:../dashboard.php");
@@ -65,9 +62,9 @@ if (isset($_POST['submit'])) {
         </nav>
 
         <div class="login-card ml-5 p-3 text-left rounded-lg">
-            <?php if (isset($_SESSION['messages'])) { ?>
+            <?php if (isset($_GET['error']) && $_GET['error'] == 'login') { ?>
                 <div class="error-message text-white bg-danger p-3 mb-3 rounded-lg" id='error-message'>
-                    <?= $_SESSION['messages'] ?>
+                    your email or password is incorrect, please try again !
                 </div>
             <?php } ?>
             <div class="card mx-auto">
@@ -102,7 +99,7 @@ if (isset($_POST['submit'])) {
         if (session_msg) {
             setTimeout(() => {
                 elm_error.remove();
-            }, 3000);
+            }, 8000);
         }
     </script>
 </body>
