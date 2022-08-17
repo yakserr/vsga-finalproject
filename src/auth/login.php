@@ -18,17 +18,17 @@ if (isset($_POST['submit'])) {
 
     // check if the email and password is exist/valid in database
 
-    $user_sql = mysqli_query($conn, "SELECT * FROM users  WHERE email = '$email' and password = '$password'");
-    $result_user = mysqli_num_rows($user_sql);
+    $admin_sql = mysqli_query($conn, "SELECT * FROM admin  WHERE email = '$email' and password = '$password'");
+    $admin = mysqli_num_rows($admin_sql);
 
     // validate the email and password
-    if (!$result_user) {
+    if (!$admin) {
 
         header("location: $_SERVER[PHP_SELF]?error=login");
     } else {
         // session data
-        $data = mysqli_fetch_assoc($user_sql);
-        $_SESSION['id'] = $data['id'];
+        $data = mysqli_fetch_assoc($admin_sql);
+        $_SESSION['id'] = $data['admin_id'];
         $_SESSION['name'] = $data['name'];
         $_SESSION['email'] = $data['email'];
         $_SESSION['is_logged_in'] = true;
