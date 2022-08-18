@@ -31,6 +31,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['id'] = $data['admin_id'];
         $_SESSION['name'] = $data['name'];
         $_SESSION['email'] = $data['email'];
+        $_SESSION['photo'] = $data['photo'];
         $_SESSION['is_logged_in'] = true;
 
         // redirect to dashboard page
@@ -57,7 +58,7 @@ if (isset($_POST['submit'])) {
 <body>
     <div class="hero">
         <nav class="navbar navbar-expand-lg navbar-light shadow-lg justify-content-between">
-            <a class="navbar-brand text-light" href="../../index.php">Perpus</a>
+            <a class="text-light" href="../../index.php">Perpus</a>
 
         </nav>
 

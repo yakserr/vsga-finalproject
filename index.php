@@ -25,11 +25,22 @@ include_once 'config.php';
     <!-- Hero bar -->
     <div class="hero">
         <!-- Header  -->
-        <nav class="navbar navbar-expand-lg navbar-light shadow-lg justify-content-between">
-            <a class="navbar-brand text-light" href="index.php">Perpus</a>
-
+        <nav class="navbar navbar-expand-lg navbar-light shadow-lg justify-content-between p-2">
+            <a class="text-light" href="index.php">Perpus</a>
             <div class="navbar-nav">
-                <a class="nav-link text-light" href="src/auth/login.php">Login</a>
+                <?php if (isset($_SESSION['is_logged_in']) === true) : ?>
+                    <li class="nav-item dropdown list-unstyled">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img width="30" src="assets/img/default.png" alt="">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="src/dashboard.php">Dashboard</a>
+                            <a class="dropdown-item" href="src/auth/logout.php">Logout</a>
+                        </div>
+                    </li>
+                <?php else : ?>
+                    <a class="nav-link text-light" href="src/auth/login.php">Login</a>
+                <?php endif; ?>
             </div>
         </nav>
         <!-- End Header  -->
