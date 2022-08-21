@@ -1,4 +1,5 @@
 <?php
+include_once 'helper.php';
 
 // App name
 define('APP_NAME', 'VSGA Final Project!');
@@ -12,6 +13,5 @@ $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
 $db = 'vsga_finalproject';
-
 
 $conn = new mysqli($dbhost, $dbuser, $dbpass, $db) or die("Connect failed: %s\n" . $conn->error);
