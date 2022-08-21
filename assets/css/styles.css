@@ -137,3 +137,11 @@
     background-color: #9bc7f2;
     border-radius: 20px;
 }
+
+
+/* text */
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
