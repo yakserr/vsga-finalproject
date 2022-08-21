@@ -103,7 +103,7 @@ if (isset($_SESSION['is_logged_in']) === false) {
                     <ul class="nav flex-column mb-2 ">
                         <div class="menu-sidebar p-2 ">
                             <li class="nav-item">
-                                <a class="nav-link d-flex" href="#">
+                                <a class="nav-link d-flex" href="transaction/borrows/borrows.php">
                                     <div class="icon align-middle">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
@@ -118,7 +118,7 @@ if (isset($_SESSION['is_logged_in']) === false) {
                         </div>
                         <div class="menu-sidebar p-2 ">
                             <li class="nav-item">
-                                <a class="nav-link d-flex" href="#">
+                                <a class="nav-link d-flex" href="transaction/returns/returns.php">
                                     <div class="icon align-middle">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -135,7 +135,7 @@ if (isset($_SESSION['is_logged_in']) === false) {
                     <ul class="nav flex-column">
                         <div class="menu-sidebar p-2 ">
                             <li class="nav-item">
-                                <a class="nav-link d-flex" href="#">
+                                <a class="nav-link d-flex" href="transaction/reports/reports.php">
                                     <div class="icon align-middle">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z" />
@@ -175,7 +175,7 @@ if (isset($_SESSION['is_logged_in']) === false) {
                 <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 mt-3">
 
                     <div class="greetings">
-                        <p class="text-muted m-0">Welcome Johnathan</p>
+                        <p class="text-muted m-0">Welcome <?= $_SESSION['name'] ?></p>
                         <h3 class="font-weight-bolder">Analytical Dashboard</h3>
                     </div>
                     <!-- <div class="btn-toolbar mb-2 mb-md-0">
