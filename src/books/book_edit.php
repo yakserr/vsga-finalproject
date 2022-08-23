@@ -79,7 +79,7 @@ $book = mysqli_fetch_assoc($bookById);
                         <!-- Members -->
                         <div class="menu-sidebar p-2 ">
                             <li class="nav-item">
-                                <a class="nav-link active d-flex" href="members.php">
+                                <a class="nav-link d-flex" href="../members/members.php">
                                     <div class="icon align-middle">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-microsoft-teams" viewBox="0 0 16 16">
                                             <path d="M9.186 4.797a2.42 2.42 0 1 0-2.86-2.448h1.178c.929 0 1.682.753 1.682 1.682v.766Zm-4.295 7.738h2.613c.929 0 1.682-.753 1.682-1.682V5.58h2.783a.7.7 0 0 1 .682.716v4.294a4.197 4.197 0 0 1-4.093 4.293c-1.618-.04-3-.99-3.667-2.35Zm10.737-9.372a1.674 1.674 0 1 1-3.349 0 1.674 1.674 0 0 1 3.349 0Zm-2.238 9.488c-.04 0-.08 0-.12-.002a5.19 5.19 0 0 0 .381-2.07V6.306a1.692 1.692 0 0 0-.15-.725h1.792c.39 0 .707.317.707.707v3.765a2.598 2.598 0 0 1-2.598 2.598h-.013Z" />
@@ -96,7 +96,7 @@ $book = mysqli_fetch_assoc($bookById);
                         <!-- Books -->
                         <div class="menu-sidebar p-2 ">
                             <li class="nav-item">
-                                <a class="nav-link d-flex" href="../books/books.php">
+                                <a class="nav-link active d-flex" href="books.php">
                                     <div class="icon align-middle">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
                                             <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
@@ -125,7 +125,7 @@ $book = mysqli_fetch_assoc($bookById);
                         <!-- Borrow Transaction -->
                         <div class="menu-sidebar p-2 ">
                             <li class="nav-item">
-                                <a class="nav-link d-flex" href="#">
+                                <a class="nav-link d-flex" href="../transaction/borrows/borrows.php">
                                     <div class="icon align-middle">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
@@ -142,7 +142,7 @@ $book = mysqli_fetch_assoc($bookById);
                         <!-- Return Transaction -->
                         <div class="menu-sidebar p-2 ">
                             <li class="nav-item">
-                                <a class="nav-link d-flex" href="#">
+                                <a class="nav-link d-flex" href="../transaction/returns/returns.php">
                                     <div class="icon align-middle">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -162,7 +162,7 @@ $book = mysqli_fetch_assoc($bookById);
                     <ul class="nav flex-column">
                         <div class="menu-sidebar p-2 ">
                             <li class="nav-item">
-                                <a class="nav-link d-flex" href="#">
+                                <a class="nav-link d-flex" href="../transaction/reports/reports.php">
                                     <div class="icon align-middle">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z" />
@@ -210,7 +210,7 @@ $book = mysqli_fetch_assoc($bookById);
                 <!-- Body -->
                 <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 mt-3">
                     <div class="greetings">
-                        <h3 class="font-weight-bolder">Members Edit Form</h3>
+                        <h3 class="font-weight-bolder">Book Edit Form</h3>
                     </div>
                 </div>
 

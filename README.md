@@ -1,4 +1,48 @@
-# Folder structure
+# Final Project
+
+Buatlah SIM Perpus dengan modul sebagai berikut;
+
+1. Login.
+2. Beranda.
+3. Anggota-list.
+4. Anggota-form.
+5. Cetak kartu.
+6. Buku-list.
+7. Buku-form.
+8. Transaksi-list.
+9. Transaksi-form.
+10. Cetak laporan (peminjaman & pengembalian).
+
+## Final Project Spec DB
+
+    |-- anggota
+        |-- id_anggota int(11) auto_increment
+        |-- kode_anggota varchar(10)
+        |-- nama varchar(50)
+        |-- email varchar(75)
+        |-- telp varchar (15)
+        |-- alamat (text)
+        |-- foto varchar(255)
+        |-- alamat (text)
+        |-- jenis kelamin (enum)
+    |-- buku
+        |-- id_buku int(11) auto_increment
+        |-- kode_buku varchar(15)
+        |-- judul varchar(100)
+        |-- keterangan text
+        |-- pengarang varchar(50)
+        |-- penerbit varchar (50)
+        |-- tahun YEAR
+    |-- transaksi
+        |-- id_transaksi int(11) auto_increment
+        |-- id_anggota int(11)
+        |-- id_buku int(11)
+        |-- tanggal_pinjam DATE
+        |-- tanggal_kembali DATE
+        |-- tanggal_kembali_asli DATE
+        |-- tahun
+
+## Folder structure
 
     |-- assets
         |-- css
