@@ -18,52 +18,48 @@ if (isset($_POST['submit'])) {
     if ($_POST['submit'] === 'create') {
 
         // take the data from the form and put it into variables
-        $title = $_POST['title'];
-        $description = $_POST['description'];
-        $author = $_POST['author'];
-        $publisher = $_POST['publisher'];
-        $year = $_POST['year'];
+        $judul = $_POST['judul'];
+        $keterangan = $_POST['keterangan'];
+        $pengarang = $_POST['pengarang'];
+        $penerbit = $_POST['penerbit'];
+        $tahun = $_POST['tahun'];
 
         // Book Code
-        $sql = mysqli_query($conn, "SELECT book_id as id FROM books ORDER BY book_id DESC LIMIT 1");
+        $sql = mysqli_query($conn, "SELECT id_buku as id FROM buku ORDER BY id_buku DESC LIMIT 1");
         $row = mysqli_fetch_assoc($sql);
         $id = $row['id'] + 1;
-        $book_code = 'M-' . $id;
+        $kode_buku = 'M-' . $id;
 
         // save the data into the database
-        $sql = mysqli_query($conn, "INSERT INTO books (book_code, title, description, author, publisher, year) VALUES ( '$book_code' ,'$title', '$description', '$author', '$publisher', '$year')");
+        $sql = mysqli_query($conn, "INSERT INTO buku (kode_buku, judul, keterangan, pengarang, penerbit, tahun) VALUES ( '$kode_buku' ,'$judul', '$keterangan', '$pengarang', '$penerbit', '$tahun')");
 
         // if the data is saved into the database
         if ($sql) {
-            header("location:../books/index.php");
+            header("location: books.php?success=create");
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
-
-        header('location: books.php?success=create');
     }
     // if the form submit is update
     else if ($_POST['submit'] === 'update') {
 
         // take the data from the form and put it into variables
         $id = $_POST['id'];
-        $title = $_POST['title'];
-        $description = $_POST['description'];
-        $author = $_POST['author'];
-        $publisher = $_POST['publisher'];
-        $year = $_POST['year'];
+        $judul = $_POST['judul'];
+        $keterangan = $_POST['keterangan'];
+        $pengarang = $_POST['pengarang'];
+        $penerbit = $_POST['penerbit'];
+        $tahun = $_POST['tahun'];
 
         // save the data into the database
-        $sql = mysqli_query($conn, "UPDATE books SET title = '$title', description = '$description', author = '$author', publisher = '$publisher', year = '$year' WHERE book_id = '$id'");
+        $sql = mysqli_query($conn, "UPDATE buku SET judul = '$judul', keterangan = '$keterangan', pengarang = '$pengarang', penerbit = '$penerbit', tahun = '$tahun' WHERE id_buku = '$id'");
 
         // if the data is saved into the database
         if ($sql) {
-            header("location:../books/index.php");
+            header("location: books.php?success=update");
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
-
-        header('location: books.php?success=update');
     }
     // if the form submit is delete
     else if ($_POST['submit'] === 'delete') {
@@ -71,16 +67,14 @@ if (isset($_POST['submit'])) {
         // take the data from the form and put it into variables
         $id = $_POST['id'];
         // save the data into the database
-        $sql = mysqli_query($conn, "DELETE FROM books WHERE book_id = '$id'");
+        $sql = mysqli_query($conn, "DELETE FROM buku WHERE id_buku = '$id'");
 
         // if the data is saved into the database
         if ($sql) {
-            header("location:../books/index.php");
+            header("location: books.php?success=delete");
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
-
-        header('location: books.php?success=delete');
     }
 } else {
 

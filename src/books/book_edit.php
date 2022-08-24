@@ -12,7 +12,7 @@ if (isset($_SESSION['is_logged_in']) === false) {
 
 $book_id = $_GET['id'];
 
-$bookById = mysqli_query($conn, "SELECT * FROM books WHERE book_id = '$book_id'");
+$bookById = mysqli_query($conn, "SELECT * FROM buku WHERE id_buku = '$book_id'");
 $book = mysqli_fetch_assoc($bookById);
 
 
@@ -200,7 +200,7 @@ $book = mysqli_fetch_assoc($bookById);
                             <img width="35" src="../../assets/img/default.png" alt="">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">My Profile</a>
+                            <a class="dropdown-item" href="#">Profile</a>
                             <a class="dropdown-item" href="auth/logout.php">Logout</a>
                         </div>
                     </li>
@@ -210,7 +210,7 @@ $book = mysqli_fetch_assoc($bookById);
                 <!-- Body -->
                 <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 mt-3">
                     <div class="greetings">
-                        <h3 class="font-weight-bolder">Book Edit Form</h3>
+                        <h3 class="font-weight-bolder">Buku Edit Form</h3>
                     </div>
                 </div>
 
@@ -224,7 +224,7 @@ $book = mysqli_fetch_assoc($bookById);
                                 <div>
                                     <div class="mb-4">
                                         <div class="header-table d-flex justify-content-between">
-                                            <h4 class="card-title">Members Edit</h4>
+                                            <h4 class="card-title">Buku Edit</h4>
                                             <div class="btn-toolbar mb-2 mb-md-0">
                                             </div>
                                         </div>
@@ -237,33 +237,32 @@ $book = mysqli_fetch_assoc($bookById);
                                                         <div class="col-md-9">
                                                             <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
                                                             <div class="form-group">
-                                                                <label for="title">Title</label>
-                                                                <input type="text" class="form-control submit" id="title" name="title" value="<?= $book['title'] ?>" required>
+                                                                <label for="judul">Judul</label>
+                                                                <input type="text" class="form-control submit" id="judul" name="judul" value="<?= $book['judul'] ?>" required>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="description">Description</label>
-                                                                <textarea id="description" name="description" class="form-control" rows="3" required><?= $book['description'] ?>
-                                                                </textarea>
+                                                                <label for="keterangan">Keterangan</label>
+                                                                <textarea id="keterangan" name="keterangan" class="form-control" rows="3" required><?= $book['keterangan'] ?></textarea>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="author">Author</label>
-                                                                <input type="author" class="form-control" id="author" name="author" value="<?= $book['author'] ?>" required>
+                                                                <label for="pengarang">Pengarang</label>
+                                                                <input type="text" class="form-control" id="pengarang" name="pengarang" value="<?= $book['pengarang'] ?>" required>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="publisher">publisher</label>
-                                                                <input type="text" class="form-control" id="publisher" name="publisher" value="<?= $book['publisher'] ?>" required>
+                                                                <label for="penerbit">Penerbit</label>
+                                                                <input type="text" class="form-control" id="penerbit" name="penerbit" value="<?= $book['penerbit'] ?>" required>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="year">Year Rilis</label>
-                                                                <input type="text" class="form-control" id="year" name="year" value="<?= $book['year'] ?>" required>
+                                                                <label for="tahun">Tahun Rilis</label>
+                                                                <input type="text" class="form-control" id="tahun" name="tahun" value="<?= $book['tahun'] ?>" required>
                                                             </div>
 
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                                         <button type="submit" class="btn btn-primary" name="submit" value='update'>
-                                                            Save and Update
+                                                            Simpan dan Ubah
                                                         </button>
                                                     </div>
                                                 </div>

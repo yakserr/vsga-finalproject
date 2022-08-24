@@ -12,7 +12,7 @@ if (isset($_SESSION['is_logged_in']) === false) {
 
 $member_id = $_GET['id'];
 
-$memberById = mysqli_query($conn, "SELECT * FROM members WHERE member_id = '$member_id'");
+$memberById = mysqli_query($conn, "SELECT * FROM anggota WHERE id_anggota = '$member_id'");
 $member = mysqli_fetch_assoc($memberById);
 
 
@@ -210,7 +210,7 @@ $member = mysqli_fetch_assoc($memberById);
                 <!-- Body -->
                 <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 mt-3">
                     <div class="greetings">
-                        <h3 class="font-weight-bolder">Members Edit Form</h3>
+                        <h3 class="font-weight-bolder">Anggota Edit Form</h3>
                     </div>
                 </div>
 
@@ -224,7 +224,7 @@ $member = mysqli_fetch_assoc($memberById);
                                 <div>
                                     <div class="mb-4">
                                         <div class="header-table d-flex justify-content-between">
-                                            <h4 class="card-title">Members Edit</h4>
+                                            <h4 class="card-title">Anggota Edit</h4>
                                             <div class="btn-toolbar mb-2 mb-md-0">
                                             </div>
                                         </div>
@@ -237,31 +237,31 @@ $member = mysqli_fetch_assoc($memberById);
                                                         <div class="col-md-8">
                                                             <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
                                                             <div class="form-group">
-                                                                <label for="member_code">Member Code</label>
-                                                                <input type="text" class="form-control submit" id="member_code" name="member_code" value="<?= $member['member_code'] ?>" disabled>
+                                                                <label for="kode_anggota">Kode Anggota</label>
+                                                                <input type="text" class="form-control submit" id="kode_anggota" name="kode_anggota" value="<?= $member['kode_anggota'] ?>" disabled>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="name">Name</label>
-                                                                <input type="text" class="form-control submit" id="name" name="name" value="<?= $member['name'] ?>" required>
+                                                                <label for="nama">Nama</label>
+                                                                <input type="text" class="form-control submit" id="nama" name="nama" value="<?= $member['nama'] ?>" required>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="email">Email</label>
                                                                 <input type="email" class="form-control" id="email" name="email" value="<?= $member['email'] ?>" required>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="phone">Phone</label>
-                                                                <input type="text" class="form-control" id="phone" name="phone" value="<?= $member['phone'] ?>" required>
+                                                                <label for="telp">No. Telp</label>
+                                                                <input type="text" class="form-control" id="telp" name="telp" value="<?= $member['telp'] ?>" required>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="address">Address</label>
-                                                                <textarea id="address" name="address" class="form-control" rows="3" required><?= $member['address'] ?></textarea>
+                                                                <label for="alamat">Alamat</label>
+                                                                <textarea id="alamat" name="alamat" class="form-control" rows="3" required><?= $member['alamat'] ?></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4 mr-auto justify-content-center align-items-center">
                                                             <div class="img">
-                                                                <label for="address">Images</label>
-                                                                <?php if ($member['photo']) : ?>
-                                                                    <img class="img-preview img-fluid" src="../../assets/img/profile_user/<?= $member['photo'] ?>" alt="" width="100%">
+                                                                <label for="images">Foto</label>
+                                                                <?php if ($member['foto']) : ?>
+                                                                    <img class="img-preview img-fluid" src="../../assets/img/profile_user/<?= $member['foto'] ?>" alt="" width="100%">
                                                                 <?php else : ?>
                                                                     <img class="img-preview img-fluid">
                                                                 <?php endif ?>
@@ -275,9 +275,9 @@ $member = mysqli_fetch_assoc($memberById);
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                                         <button type="submit" class="btn btn-primary" name="submit" value='update'>
-                                                            Save and Update
+                                                            Simpan dan Ubah
                                                         </button>
                                                     </div>
                                                 </div>
