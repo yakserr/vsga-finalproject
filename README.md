@@ -16,6 +16,13 @@ Buatlah SIM Perpus dengan modul sebagai berikut;
 ## Final Project Spec DB
 
     |-- anggota
+        |-- id_admin int(11) auto_increment
+        |-- nama varchar(50)
+        |-- email varchar(75)
+        |-- telp varchar(15)
+        |-- password varchar(255)
+        |-- foto varchar(255)
+    |-- anggota
         |-- id_anggota int(11) auto_increment
         |-- kode_anggota varchar(10)
         |-- nama varchar(50)
@@ -23,7 +30,6 @@ Buatlah SIM Perpus dengan modul sebagai berikut;
         |-- telp varchar (15)
         |-- alamat (text)
         |-- foto varchar(255)
-        |-- alamat (text)
         |-- jenis kelamin (enum)
     |-- buku
         |-- id_buku int(11) auto_increment
@@ -40,7 +46,6 @@ Buatlah SIM Perpus dengan modul sebagai berikut;
         |-- tanggal_pinjam DATE
         |-- tanggal_kembali DATE
         |-- tanggal_kembali_asli DATE
-        |-- tahun
 
 ## Folder structure
 
