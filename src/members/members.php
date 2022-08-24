@@ -11,7 +11,7 @@ if (isset($_SESSION['is_logged_in']) === false) {
 }
 
 // query to get all members
-$membersAll = mysqli_query($conn, "SELECT * FROM members");
+$membersAll = mysqli_query($conn, "SELECT * FROM anggota");
 
 // pagination
 $limit = 10;
@@ -24,7 +24,7 @@ $next = $page + 1;
 $total_data = mysqli_num_rows($membersAll);
 $total_page = ceil($total_data / $limit);
 
-$members = mysqli_query($conn, "SELECT * FROM members LIMIT $start , $limit");
+$members = mysqli_query($conn, "SELECT * FROM anggota LIMIT $start , $limit");
 
 
 ?>
@@ -210,7 +210,7 @@ $members = mysqli_query($conn, "SELECT * FROM members LIMIT $start , $limit");
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">My Profile</a>
-                            <a class="dropdown-item" href="auth/logout.php">Logout</a>
+                            <a class="dropdown-item" href="../auth/logout.php">Logout</a>
                         </div>
                     </li>
                 </div>
@@ -231,11 +231,11 @@ $members = mysqli_query($conn, "SELECT * FROM members LIMIT $start , $limit");
                             </div>
                             <div class="toast-body">
                                 <?php if ($_GET['success'] == 'create') : ?>
-                                    <p class="">Data successfully <span class="text-success">Created</span> !</p>
+                                    <p class="">Data berhasil <span class="text-success">Dibuat</span> !</p>
                                 <?php elseif ($_GET['success'] == 'update') : ?>
-                                    <p class="">Data successfully <span class="text-warning">Updated</span> !</p>
+                                    <p class="">Data berhasil <span class="text-warning">Diubah</span> !</p>
                                 <?php elseif ($_GET['success'] == 'delete') : ?>
-                                    <p class="">Data successfully <span class="text-danger">Deleted</span> !</p>
+                                    <p class="">Data berhasil <span class="text-danger">Dihapus</span> !</p>
                                 <?php endif ?>
                             </div>
                         </div>
@@ -254,9 +254,9 @@ $members = mysqli_query($conn, "SELECT * FROM members LIMIT $start , $limit");
                             </div>
                             <div class="toast-body">
                                 <?php if ($_GET['error'] == 'image_size') : ?>
-                                    <p class="text-danger"> Image size is too large !</p>
+                                    <p class="text-danger"> Ukuran Foto/Gambar terlalu besar !</p>
                                 <?php elseif ($_GET['error'] == 'image_type') : ?>
-                                    <p class="text-danger"> Image type is not supported !</p>
+                                    <p class="text-danger"> Tipe Foto/Gambar tidak cocok !</p>
                                 <?php endif ?>
                             </div>
                         </div>
@@ -282,11 +282,11 @@ $members = mysqli_query($conn, "SELECT * FROM members LIMIT $start , $limit");
                                 </li>
                                 <li class="mr-1">/</li>
                                 <li class="mr-1 align-bottom">
-                                    <a href="members.php" class="text-decoration-none">Members</a>
+                                    <a href="members.php" class="text-decoration-none">Anggota</a>
                                 </li>
                             </ol>
                         </div>
-                        <h3 class="font-weight-bolder">Members</h3>
+                        <h3 class="font-weight-bolder">Anggota</h3>
                     </div>
                 </div>
 
@@ -300,7 +300,7 @@ $members = mysqli_query($conn, "SELECT * FROM members LIMIT $start , $limit");
                                 <div>
                                     <div class="mb-4">
                                         <div class="header-table d-flex justify-content-between">
-                                            <h4 class="card-title">Information Members</h4>
+                                            <h4 class="card-title">Informasi Anggota</h4>
                                             <div class="btn-toolbar mb-2 mb-md-0">
                                                 <li class="nav-item dropdown list-unstyled pr-0 pl-0">
                                                     <button type="button" class="nav-link dropdown-toggle border border-secondary bg-white text-muted" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -314,10 +314,10 @@ $members = mysqli_query($conn, "SELECT * FROM members LIMIT $start , $limit");
                                                 </li>
                                             </div>
                                         </div>
-                                        <p class="text-muted">Overview of detail information members</p>
+                                        <p class="text-muted">Detail Informasi Anggota</p>
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
-                                            Create
+                                            Tambah
                                         </button>
 
                                         <!-- Modal -->
@@ -325,7 +325,7 @@ $members = mysqli_query($conn, "SELECT * FROM members LIMIT $start , $limit");
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="createModalLabel">Form Member</h5>
+                                                        <h5 class="modal-title" id="createModalLabel">Form Anggota</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -338,29 +338,29 @@ $members = mysqli_query($conn, "SELECT * FROM members LIMIT $start , $limit");
                                                                 <div class="row">
                                                                     <div class="col-md-8">
                                                                         <div class="form-group">
-                                                                            <label for="name">Name</label>
-                                                                            <input type="text" class="form-control submit" id="name" name="name" placeholder="Name" required>
+                                                                            <label for="nama">Nama</label>
+                                                                            <input type="text" class="form-control submit" id="nama" name="nama" placeholder="Nama" required>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label for="email">Email</label>
                                                                             <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="phone">Phone</label>
-                                                                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" required>
+                                                                            <label for="telp">No. Telp</label>
+                                                                            <input type="text" class="form-control" id="telp" name="telp" placeholder="No. Telp" required>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="address">Address</label>
-                                                                            <textarea id="address" name="address" placeholder="Address" class="form-control" rows="3" required></textarea>
+                                                                            <label for="alamat">Alamat</label>
+                                                                            <textarea id="alamat" name="alamat" placeholder="Alamat" class="form-control" rows="3" required></textarea>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-4 mr-auto mt-5 justify-content-center align-items-center">
-                                                                        <label for="address">Images</label>
+                                                                        <label for="image">Foto</label>
                                                                         <img class="img-preview img-fluid">
                                                                         <div class="form-group input-group mt-2">
                                                                             <div class="custom-file">
                                                                                 <input type="file" class="custom-file-input" id="image" name="image" aria-describedby="image" accept="image/*" onchange="previewImage()">
-                                                                                <label class="custom-file-label" for="image">Choose file</label>
+                                                                                <label class="custom-file-label" for="image">Pilih yaa!</label>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -368,7 +368,7 @@ $members = mysqli_query($conn, "SELECT * FROM members LIMIT $start , $limit");
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                                     <button type="submit" class="btn btn-primary" name="submit" value='create'>
-                                                                        Create
+                                                                        Tambah
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -385,59 +385,59 @@ $members = mysqli_query($conn, "SELECT * FROM members LIMIT $start , $limit");
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th>Member Code</th>
-                                                        <th>Photo</th>
-                                                        <th>Name</th>
+                                                        <th>Kode Anggota</th>
+                                                        <th>Foto</th>
+                                                        <th>Nama</th>
                                                         <th>Email</th>
-                                                        <th>Phone</th>
-                                                        <th>Address</th>
-                                                        <th>Action</th>
+                                                        <th>No Telp</th>
+                                                        <th>Alamat</th>
+                                                        <th>Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php foreach ($members as $member) : ?>
                                                         <tr class="text-nowrap">
-                                                            <td><?= $member['member_code'] ?></td>
+                                                            <td><?= $member['kode_anggota'] ?></td>
                                                             <td>
-                                                                <?php if ($member['photo']) : ?>
-                                                                    <img class="img-fluid" src="../../assets/img/profile_user/<?= $member['photo'] ?>" alt="photo">
+                                                                <?php if ($member['foto']) : ?>
+                                                                    <img class="img-fluid" src="../../assets/img/profile_user/<?= $member['foto'] ?>" alt="photo">
                                                                 <?php else : ?>
                                                                     <img class="img-fluid" src="../../assets/img/defaultuser.jpg" alt="photo">
                                                                 <?php endif ?>
                                                             </td>
-                                                            <td><?= $member['name'] ?></td>
+                                                            <td><?= $member['nama'] ?></td>
                                                             <td><?= $member['email'] ?></td>
-                                                            <td><?= $member['phone'] ?></td>
-                                                            <td><?= $member['address'] ?></td>
+                                                            <td><?= $member['telp'] ?></td>
+                                                            <td><?= $member['alamat'] ?></td>
                                                             <td>
                                                                 <div class="d-flex flex-row">
                                                                     <button type="button" class="btn btn-primary btn-sm mr-1">
-                                                                        <a href="?card=<?= $member['member_id'] ?>" class="text-white">Card</a>
+                                                                        <a href="?card=<?= $member['id_anggota'] ?>" class="text-white">Card</a>
                                                                     </button>
                                                                     <button type="button" class="btn btn-warning btn-sm mr-1">
-                                                                        <a href="member_edit.php?id=<?= $member['member_id'] ?>" class="text-white">Edit</a>
+                                                                        <a href="member_edit.php?id=<?= $member['id_anggota'] ?>" class="text-white">Edit</a>
                                                                     </button>
-                                                                    <button type="button" class="btn btn-danger btn-sm mr-1" data-toggle="modal" data-target="#deleteModal<?= $member['member_id'] ?>">
-                                                                        <a class="text-white">Delete</a>
+                                                                    <button type="button" class="btn btn-danger btn-sm mr-1" data-toggle="modal" data-target="#deleteModal<?= $member['id_anggota'] ?>">
+                                                                        <a class="text-white">Hapus</a>
                                                                     </button>
                                                                     <!-- Modal -->
                                                                     <form action="member_crud.php" method="post">
-                                                                        <input type="hidden" name="id" value="<?= $member['member_id'] ?>" />
-                                                                        <div class=" modal fade" id="deleteModal<?= $member['member_id'] ?>" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                                        <input type="hidden" name="id" value="<?= $member['id_anggota'] ?>" />
+                                                                        <div class=" modal fade" id="deleteModal<?= $member['id_anggota'] ?>" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                                                             <div class="modal-dialog">
                                                                                 <div class="modal-content">
                                                                                     <div class="modal-header">
-                                                                                        <h5 class="modal-title" id="deleteModalLabel">Delete Data <?= $member['member_code'] ?></h5>
+                                                                                        <h5 class="modal-title" id="deleteModalLabel">Hapus Data <?= $member['id_anggota'] ?></h5>
                                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                             <span aria-hidden="true">&times;</span>
                                                                                         </button>
                                                                                     </div>
                                                                                     <div class="modal-body">
-                                                                                        Are you sure you want to delete this member?
+                                                                                        Apakah anda yakin mau hapus data ini?
                                                                                     </div>
                                                                                     <div class=" modal-footer">
-                                                                                        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-                                                                                        <button type="submit" name="submit" value="delete" class="btn btn-danger">Delete</button>
+                                                                                        <button type="button" class="btn btn-success" data-dismiss="modal">Tutup</button>
+                                                                                        <button type="submit" name="submit" value="delete" class="btn btn-danger">Hapus</button>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

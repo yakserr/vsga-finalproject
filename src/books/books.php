@@ -11,7 +11,7 @@ if (isset($_SESSION['is_logged_in']) === false) {
 }
 
 // query to get all books
-$booksAll = mysqli_query($conn, "SELECT * FROM books");
+$booksAll = mysqli_query($conn, "SELECT * FROM buku");
 
 // pagination
 $limit = 10;
@@ -24,7 +24,7 @@ $next = $page + 1;
 $total_data = mysqli_num_rows($booksAll);
 $total_page = ceil($total_data / $limit);
 
-$books = mysqli_query($conn, "SELECT * FROM books LIMIT $start , $limit");
+$books = mysqli_query($conn, "SELECT * FROM buku LIMIT $start , $limit");
 
 
 ?>
@@ -209,7 +209,7 @@ $books = mysqli_query($conn, "SELECT * FROM books LIMIT $start , $limit");
                             <img width="35" src="../../assets/img/default.png" alt="">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">My Profile</a>
+                            <a class="dropdown-item" href="#">Profile</a>
                             <a class="dropdown-item" href="auth/logout.php">Logout</a>
                         </div>
                     </li>
@@ -230,11 +230,11 @@ $books = mysqli_query($conn, "SELECT * FROM books LIMIT $start , $limit");
                             </div>
                             <div class="toast-body">
                                 <?php if ($_GET['success'] == 'create') : ?>
-                                    <p class="">Data successfully <span class="text-success">Created</span> !</p>
+                                    <p class="">Data berhasil <span class="text-success">Dibuat</span> !</p>
                                 <?php elseif ($_GET['success'] == 'update') : ?>
-                                    <p class="">Data successfully <span class="text-warning">Updated</span> !</p>
+                                    <p class="">Data berhasil <span class="text-warning">Diubah</span> !</p>
                                 <?php elseif ($_GET['success'] == 'delete') : ?>
-                                    <p class="">Data successfully <span class="text-danger">Deleted</span> !</p>
+                                    <p class="">Data berhasil <span class="text-danger">Dihapus</span> !</p>
                                 <?php endif ?>
                             </div>
                         </div>
@@ -260,11 +260,11 @@ $books = mysqli_query($conn, "SELECT * FROM books LIMIT $start , $limit");
                                 </li>
                                 <li class="mr-1">/</li>
                                 <li class="mr-1 align-bottom">
-                                    <a href="books.php" class="text-decoration-none">Books</a>
+                                    <a href="books.php" class="text-decoration-none">Buku</a>
                                 </li>
                             </ol>
                         </div>
-                        <h3 class="font-weight-bolder">Books</h3>
+                        <h3 class="font-weight-bolder">Buku</h3>
                     </div>
                 </div>
 
@@ -278,7 +278,7 @@ $books = mysqli_query($conn, "SELECT * FROM books LIMIT $start , $limit");
                                 <div>
                                     <div class="mb-4">
                                         <div class="header-table d-flex justify-content-between">
-                                            <h4 class="card-title">Information Books</h4>
+                                            <h4 class="card-title">Informasi Buku</h4>
                                             <div class="btn-toolbar mb-2 mb-md-0">
                                                 <li class="nav-item dropdown list-unstyled pr-0 pl-0">
                                                     <button type="button" class="nav-link dropdown-toggle border border-secondary bg-white text-muted" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -292,10 +292,10 @@ $books = mysqli_query($conn, "SELECT * FROM books LIMIT $start , $limit");
                                                 </li>
                                             </div>
                                         </div>
-                                        <p class="text-muted">Overview of detail information of Books</p>
+                                        <p class="text-muted">Detail Informasi Anggota</p>
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
-                                            Create
+                                            Tambah
                                         </button>
 
                                         <!-- Modal -->
@@ -303,7 +303,7 @@ $books = mysqli_query($conn, "SELECT * FROM books LIMIT $start , $limit");
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="createModalLabel">Form Books</h5>
+                                                        <h5 class="modal-title" id="createModalLabel">Form Buku</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -316,32 +316,32 @@ $books = mysqli_query($conn, "SELECT * FROM books LIMIT $start , $limit");
                                                                 <div class="row">
                                                                     <div class="col-md-9">
                                                                         <div class="form-group">
-                                                                            <label for="title">Title</label>
-                                                                            <input type="text" class="form-control submit" id="title" name="title" placeholder="Title" required>
+                                                                            <label for="judul">Judul</label>
+                                                                            <input type="text" class="form-control submit" id="judul" name="judul" placeholder="judul" required>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="description">Description</label>
-                                                                            <textarea id="description" name="description" placeholder="Description or synopsis of the book" class="form-control" rows="3" required></textarea>
+                                                                            <label for="keterangan">Keterangan</label>
+                                                                            <textarea id="keterangan" name="keterangan" placeholder="keterangan atau sinopsis buku" class="form-control" rows="3" required></textarea>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="author">Author</label>
-                                                                            <input type="author" class="form-control" id="author" name="author" placeholder="Author" required>
+                                                                            <label for="pengarang">Pengarang</label>
+                                                                            <input type="text" class="form-control" id="pengarang" name="pengarang" placeholder="pengarang" required>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="publisher">publisher</label>
-                                                                            <input type="text" class="form-control" id="publisher" name="publisher" placeholder="publisher" required>
+                                                                            <label for="penerbit">Penerbit</label>
+                                                                            <input type="text" class="form-control" id="penerbit" name="penerbit" placeholder="penerbit" required>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="year">Year Rilis</label>
-                                                                            <input type="text" class="form-control" id="year" name="year" placeholder="Year Rilis" required>
+                                                                            <label for="tahun">Tahun Rilis</label>
+                                                                            <input type="text" class="form-control" id="tahun" name="tahun" placeholder="tahun Rilis" required>
                                                                         </div>
 
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                                                     <button type="submit" class="btn btn-primary" name="submit" value='create'>
-                                                                        Create
+                                                                        Tambah
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -358,53 +358,53 @@ $books = mysqli_query($conn, "SELECT * FROM books LIMIT $start , $limit");
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th>Book Code</th>
-                                                        <th>Title</th>
-                                                        <th>Description</th>
-                                                        <th>Author</th>
-                                                        <th>publisher</th>
-                                                        <th>Publish Year</th>
-                                                        <th>Action</th>
+                                                        <th>Kode Buku</th>
+                                                        <th>Judul</th>
+                                                        <th>Keterangan</th>
+                                                        <th>Pengarang</th>
+                                                        <th>Penerbit</th>
+                                                        <th>Tahun Rilis</th>
+                                                        <th>Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php foreach ($books as $book) : ?>
                                                         <tr class="text-nowrap">
-                                                            <td><?= $book['book_code'] ?></td>
-                                                            <td><?= $book['title'] ?></td>
-                                                            <td><?= strlen($book['description']) > 70 ? substr($book['description'], 0, 70) . "..." : $book['description']; ?></td>
-                                                            <td><?= $book['author'] ?></td>
-                                                            <td><?= $book['publisher'] ?></td>
-                                                            <td><?= $book['year'] ?></td>
+                                                            <td><?= $book['kode_buku'] ?></td>
+                                                            <td><?= $book['judul'] ?></td>
+                                                            <td><?= strlen($book['keterangan']) > 70 ? substr($book['keterangan'], 0, 70) . "..." : $book['keterangan']; ?></td>
+                                                            <td><?= $book['pengarang'] ?></td>
+                                                            <td><?= $book['penerbit'] ?></td>
+                                                            <td><?= $book['tahun'] ?></td>
                                                             <td>
                                                                 <div class="d-flex flex-row">
                                                                     <button type="button" class="btn btn-primary btn-sm mr-1">
-                                                                        <a href="?card=<?= $book['book_id'] ?>" class="text-white">Card</a>
+                                                                        <a href="?card=<?= $book['id_buku'] ?>" class="text-white">Card</a>
                                                                     </button>
                                                                     <button type="button" class="btn btn-warning btn-sm mr-1">
-                                                                        <a href="book_edit.php?id=<?= $book['book_id'] ?>" class="text-white">Edit</a>
+                                                                        <a href="book_edit.php?id=<?= $book['id_buku'] ?>" class="text-white">Edit</a>
                                                                     </button>
-                                                                    <button type="button" class="btn btn-danger btn-sm mr-1" data-toggle="modal" data-target="#deleteModal<?= $book['book_id'] ?>">
+                                                                    <button type="button" class="btn btn-danger btn-sm mr-1" data-toggle="modal" data-target="#deleteModal<?= $book['id_buku'] ?>">
                                                                         <a class="text-white">Delete</a>
                                                                     </button>
                                                                     <!-- Modal -->
                                                                     <form action="book_crud.php" method="post">
-                                                                        <input type="hidden" name="id" value="<?= $book['book_id'] ?>" />
-                                                                        <div class=" modal fade" id="deleteModal<?= $book['book_id'] ?>" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                                        <input type="hidden" name="id" value="<?= $book['id_buku'] ?>" />
+                                                                        <div class=" modal fade" id="deleteModal<?= $book['id_buku'] ?>" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                                                             <div class="modal-dialog">
                                                                                 <div class="modal-content">
                                                                                     <div class="modal-header">
-                                                                                        <h5 class="modal-title" id="deleteModalLabel">Delete Data <?= $book['book_code'] ?></h5>
+                                                                                        <h5 class="modal-title" id="deleteModalLabel">Hapus Data <?= $book['kode_buku'] ?></h5>
                                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                             <span aria-hidden="true">&times;</span>
                                                                                         </button>
                                                                                     </div>
                                                                                     <div class="modal-body">
-                                                                                        Are you sure you want to delete this Book?
+                                                                                        Apakah anda yakin mau hapus data ini?
                                                                                     </div>
                                                                                     <div class=" modal-footer">
-                                                                                        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-                                                                                        <button type="submit" name="submit" value="delete" class="btn btn-danger">Delete</button>
+                                                                                        <button type="button" class="btn btn-success" data-dismiss="modal">Tutup</button>
+                                                                                        <button type="submit" name="submit" value="delete" class="btn btn-danger">Hapus</button>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
