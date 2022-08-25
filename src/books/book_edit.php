@@ -201,7 +201,7 @@ $book = mysqli_fetch_assoc($bookById);
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Profile</a>
-                            <a class="dropdown-item" href="auth/logout.php">Logout</a>
+                            <a class="dropdown-item" href="../auth/logout.php">Logout</a>
                         </div>
                     </li>
                 </div>
@@ -242,7 +242,7 @@ $book = mysqli_fetch_assoc($bookById);
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="keterangan">Keterangan</label>
-                                                                <textarea id="keterangan" name="keterangan" class="form-control" rows="3" required><?= $book['keterangan'] ?></textarea>
+                                                                <textarea id="keterangan" name="keterangan" class="form-control" rows="6" required><?= $book['keterangan'] ?></textarea>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="pengarang">Pengarang</label>

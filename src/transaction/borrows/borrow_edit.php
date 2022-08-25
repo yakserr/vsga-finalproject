@@ -13,14 +13,14 @@ if (isset($_SESSION['is_logged_in']) === false) {
 $transaction_id = $_GET['id'];
 
 // transaction by id
-$transactionById = mysqli_query($conn, "SELECT * FROM transactions WHERE transaction_id = '$transaction_id'");
+$transactionById = mysqli_query($conn, "SELECT * FROM transaksi WHERE id_transaksi = '$transaction_id'");
 $transaction = mysqli_fetch_assoc($transactionById);
 
 // book info
-$books = mysqli_query($conn, "SELECT * FROM books");
+$books = mysqli_query($conn, "SELECT * FROM buku");
 
 // members info
-$member = mysqli_query($conn, "SELECT * FROM members WHERE member_id = '$transaction[member_id]'");
+$member = mysqli_query($conn, "SELECT * FROM anggota WHERE id_anggota = '$transaction[id_anggota]'");
 $member = mysqli_fetch_assoc($member);
 
 
@@ -79,7 +79,7 @@ $member = mysqli_fetch_assoc($member);
 
                     <!-- Master Data -->
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Master Data</span>
+                        <span>Data Master</span>
                         <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
                             <span data-feather="plus-circle"></span>
                         </a>
@@ -96,7 +96,7 @@ $member = mysqli_fetch_assoc($member);
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Members</span>
+                                        <span>Anggota</span>
                                     </div>
                                 </a>
                             </li>
@@ -112,7 +112,7 @@ $member = mysqli_fetch_assoc($member);
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Books</span>
+                                        <span>Buku</span>
                                     </div>
                                 </a>
                             </li>
@@ -124,7 +124,7 @@ $member = mysqli_fetch_assoc($member);
 
                     <!-- Transaction -->
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Transaction</span>
+                        <span>Transaksi</span>
                         <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
                             <span data-feather="plus-circle"></span>
                         </a>
@@ -142,7 +142,7 @@ $member = mysqli_fetch_assoc($member);
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Borrow Transaction</span>
+                                        <span>Peminjaman</span>
                                     </div>
                                 </a>
                             </li>
@@ -159,7 +159,7 @@ $member = mysqli_fetch_assoc($member);
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Return Transaction</span>
+                                        <span>Pengembalian</span>
                                     </div>
                                 </a>
                             </li>
@@ -181,7 +181,7 @@ $member = mysqli_fetch_assoc($member);
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Report Transaction</span>
+                                        <span>Report Transaksi</span>
                                     </div>
                                 </a>
                             </li>
@@ -216,54 +216,6 @@ $member = mysqli_fetch_assoc($member);
                 </div>
                 <!-- End Header -->
 
-                <!-- Toast -->
-
-                <!-- if there is success message -->
-                <?php if (isset($_GET['success'])) : ?>
-                    <div aria-live="polite" aria-atomic="true" style="position: relative;">
-                        <div class="toast border border-success" data-delay="3000" style="position: absolute; top: 0; right: 0;">
-                            <div class="toast-header ">
-                                <strong class="mr-auto text-success">Success</strong>
-                                <small>recently</small>
-                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="toast-body">
-                                <?php if ($_GET['success'] == 'create') : ?>
-                                    <p class="">Data successfully <span class="text-success">Created</span> !</p>
-                                <?php elseif ($_GET['success'] == 'update') : ?>
-                                    <p class="">Data successfully <span class="text-warning">Updated</span> !</p>
-                                <?php elseif ($_GET['success'] == 'delete') : ?>
-                                    <p class="">Data successfully <span class="text-danger">Deleted</span> !</p>
-                                <?php endif ?>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- if there is error message -->
-                <?php elseif (isset($_GET['error'])) : ?>
-                    <div aria-live="polite" aria-atomic="true" style="position: relative;">
-                        <div class="toast border border-danger" data-delay="3000" style="position: absolute; top: 0; right: 0;">
-                            <div class="toast-header ">
-                                <strong class="mr-auto text-danger">Error</strong>
-                                <small>recently</small>
-                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="toast-body">
-                                <?php if ($_GET['error'] == 'image_size') : ?>
-                                    <p class="text-danger"> Image size is too large !</p>
-                                <?php elseif ($_GET['error'] == 'image_type') : ?>
-                                    <p class="text-danger"> Image type is not supported !</p>
-                                <?php endif ?>
-                            </div>
-                        </div>
-                    </div>
-                <?php endif ?>
-                <!-- EndToast -->
-
                 <!-- Body -->
                 <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 mt-3">
                     <div class="greetings">
@@ -278,15 +230,15 @@ $member = mysqli_fetch_assoc($member);
                                 </li>
                                 <li class="mr-1">/</li>
                                 <li class="mr-1 align-bottom">
-                                    <a class="text-decoration-none text-dark">Transaction</a>
+                                    <a class="text-decoration-none text-dark">Transaksi</a>
                                 </li>
                                 <li class="mr-1">/</li>
                                 <li class="mr-1 align-bottom">
-                                    <a href="borrows.php" class="text-decoration-none">Borrow Transaction</a>
+                                    <a href="borrows.php" class="text-decoration-none">Peminjaman</a>
                                 </li>
                             </ol>
                         </div>
-                        <h3 class="font-weight-bolder">Borrow Transaction</h3>
+                        <h3 class="font-weight-bolder">Peminjaman</h3>
                     </div>
                 </div>
 
@@ -300,7 +252,7 @@ $member = mysqli_fetch_assoc($member);
                                 <div>
                                     <div class="mb-4">
                                         <div class="header-table d-flex justify-content-between">
-                                            <h4 class="card-title">Borrow Edit Transaction</h4>
+                                            <h4 class="card-title">Edit Form Peminjaman Transaksi</h4>
                                         </div>
                                         <form action="borrow_crud.php" method="POST">
                                             <div class="modal-body">
@@ -310,19 +262,19 @@ $member = mysqli_fetch_assoc($member);
                                                         <div class="col-md-10">
                                                             <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
                                                             <div class="form-group">
-                                                                <label for="member">Member Code</label>
-                                                                <input type="text" class="form-control submit" id="member" name="member" value="<?= $member['member_code'] ?>" disabled>
+                                                                <label for="anggota">Kode Anggota</label>
+                                                                <input type="text" class="form-control submit" id="anggota" name="anggota" value="<?= $member['kode_anggota'] ?>" disabled>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="name">Name</label>
-                                                                <input type="text" class="form-control submit" id="name" name="name" value="<?= $member['name'] ?>" disabled>
+                                                                <label for="nama">nama</label>
+                                                                <input type="text" class="form-control submit" id="nama" name="nama" value="<?= $member['nama'] ?>" disabled>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="book">Book</label>
-                                                                <select class="custom-select" name="book" id="book">
+                                                                <label for="buku">Buku</label>
+                                                                <select class="custom-select" name="buku" id="buku">
                                                                     <?php foreach ($books as $book) : ?>
-                                                                        <option value="<?= $book['book_id'] ?>" <?php ($book['book_id'] == $transaction['book_id']) ? 'selected' : ''; ?>>
-                                                                            <?= $book['book_code'] . " " . $book['title'] ?>
+                                                                        <option value="<?= $book['id_buku'] ?>" <?php ($book['id_buku'] == $transaction['id_buku']) ? 'selected' : ''; ?>>
+                                                                            <?= $book['kode_buku'] . " " . $book['judul'] ?>
                                                                         </option>
                                                                     <?php endforeach ?>
                                                                 </select>
@@ -330,23 +282,25 @@ $member = mysqli_fetch_assoc($member);
                                                             <div class="row">
                                                                 <div class="col-md-5">
                                                                     <div class="form-group">
-                                                                        <label for="borrow">Date Borrow</label>
-                                                                        <input type="date" name="borrow" class="form-control" id="borrow" onchange="returnDate()" value="<?= $transaction['borrow_date'] ?>">
+                                                                        <label for="pinjam">Tgl Pinjam</label>
+                                                                        <input type="date" name="pinjam" class="form-control" id="pinjam" onchange="returnDate()" value="<?= $transaction['tgl_pinjam'] ?>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                     <div class="form-group">
-                                                                        <label for="return">Books Should Return in 7 Days</label>
-                                                                        <input type="text" name="return" class="form-control border border-success" id="return" value="<?= $transaction['return_date'] ?> ">
+                                                                        <label for="kembali">
+                                                                            Buku kembali dalam <span class="text-danger">7 Hari</span>
+                                                                        </label>
+                                                                        <input type="text" name="kembali" class="form-control border border-success" id="kembali" value="<?= $transaction['tgl_kembali'] ?> ">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class=" modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                                         <button type="submit" class="btn btn-primary" name="submit" value='update'>
-                                                            Save and Update
+                                                            Simpan dan Ubah
                                                         </button>
                                                     </div>
                                                 </div>
@@ -380,8 +334,8 @@ $member = mysqli_fetch_assoc($member);
 
     <script>
         function returnDate() {
-            const borrowDate = document.getElementById("borrow").value;
-            let returnDate = document.getElementById("return");
+            const borrowDate = document.getElementById("pinjam").value;
+            let returnDate = document.getElementById("kembali");
             const date = new Date(borrowDate);
 
             resultDate = date.setDate(date.getDate() + 7)

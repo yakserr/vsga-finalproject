@@ -18,50 +18,53 @@ if (isset($_POST['submit'])) {
     if ($_POST['submit'] === 'create') {
 
         // take the data from the form and put it into variables
-        $book = $_POST['book'];
-        $member = $_POST['member'];
-        $borrow_date = $_POST['borrow'];
-        $return_date = $_POST['return'];
-
-        // transaction code
-        $sql = mysqli_query($conn, "SELECT transaction_id as id FROM transactions ORDER BY transaction_id DESC LIMIT 1");
-        $transaction = mysqli_fetch_assoc($sql);
-        $id = $transaction['id'] + 1;
-        $transaction_code = 'T-' . $id;
-        $status = 'close';
+        $buku = $_POST['buku'];
+        $anggota = $_POST['anggota'];
+        $pinjam = $_POST['pinjam'];
+        $kembali = $_POST['kembali'];
 
         // save the data into the database
-        $sql = mysqli_query($conn, "INSERT INTO transactions (transaction_code, book_id, member_id, borrow_date, return_date) VALUES ( '$transaction_code' ,'$book', '$member', '$borrow_date', '$return_date')");
+        $sql = mysqli_query($conn, "INSERT INTO transaksi (id_buku, id_anggota, tgl_pinjam, tgl_kembali) VALUES ('$buku', '$anggota', '$pinjam', '$kembali')");
 
-        $sql = mysqli_query($conn, "UPDATE books SET status = '$status' WHERE book_id = '$book'");
-
-        header('location: borrows.php?success=create');
+        // if the data is saved into the database, show the success message
+        if ($sql) {
+            header('location: borrows.php?success=create');
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
     }
 
     // if the form submit is update
     if ($_POST['submit'] === 'update') {
 
         $id = $_POST['id'];
-        $book = $_POST['book'];
-        $borrow_date = $_POST['borrow'];
-        $return_date = $_POST['return'];
+        $buku = $_POST['buku'];
+        $pinjam = $_POST['pinjam'];
+        $kembali = $_POST['kembali'];
 
-        $sql = mysqli_query($conn, "UPDATE transactions SET book_id = '$book', borrow_date = '$borrow_date', return_date = '$return_date' WHERE transaction_id = '$id'");
+        $sql = mysqli_query($conn, "UPDATE transaksi SET id_buku = '$buku', tgl_pinjam = '$pinjam', tgl_kembali = '$kembali' WHERE id_transaksi = '$id'");
 
-        header('location: borrows.php?success=update');
+        // if the data is saved into the database, show the success message
+
+        if ($sql) {
+            header('location: borrows.php?success=update');
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
     }
 
     // if the form submit is delete
     if ($_POST['submit'] === 'delete') {
 
         $id = $_POST['id'];
-        $status = 'open';
 
-        $sql = mysqli_query($conn, "DELETE FROM transactions WHERE transaction_id = '$id'");
-
-        $sql = mysqli_query($conn, "UPDATE books SET status = '$status' WHERE book_id = '$book'");
-
-        header('location: borrows.php?success=delete');
+        $sql = mysqli_query($conn, "DELETE FROM transaksi WHERE id_transaksi = '$id'");
+        // if the data is saved into the database, show the success message
+        if ($sql) {
+            header('location: borrows.php?success=delete');
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
     }
 } else {
     header('location: borrows.php');

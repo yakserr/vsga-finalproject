@@ -96,7 +96,7 @@ $books = mysqli_query($conn, "SELECT * FROM buku LIMIT $start , $limit");
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Members</span>
+                                        <span>Anggota</span>
                                     </div>
                                 </a>
                             </li>
@@ -112,7 +112,7 @@ $books = mysqli_query($conn, "SELECT * FROM buku LIMIT $start , $limit");
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Books</span>
+                                        <span>Buku</span>
                                     </div>
                                 </a>
                             </li>
@@ -142,7 +142,7 @@ $books = mysqli_query($conn, "SELECT * FROM buku LIMIT $start , $limit");
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Borrow Transaction</span>
+                                        <span>Peminjaman</span>
                                     </div>
                                 </a>
                             </li>
@@ -159,7 +159,7 @@ $books = mysqli_query($conn, "SELECT * FROM buku LIMIT $start , $limit");
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Return Transaction</span>
+                                        <span>Pengembalian</span>
                                     </div>
                                 </a>
                             </li>
@@ -181,7 +181,7 @@ $books = mysqli_query($conn, "SELECT * FROM buku LIMIT $start , $limit");
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Report Transaction</span>
+                                        <span>Report Transaksi</span>
                                     </div>
                                 </a>
                             </li>
@@ -210,7 +210,7 @@ $books = mysqli_query($conn, "SELECT * FROM buku LIMIT $start , $limit");
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Profile</a>
-                            <a class="dropdown-item" href="auth/logout.php">Logout</a>
+                            <a class="dropdown-item" href="../auth/logout.php">Logout</a>
                         </div>
                     </li>
                 </div>
@@ -249,7 +249,7 @@ $books = mysqli_query($conn, "SELECT * FROM buku LIMIT $start , $limit");
                             <ol class="list-unstyled d-flex justify-content-center">
                                 <li>
                                     <a href="../dashboard.php" class="text-decoration-none text-dark">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door mr-1 text-dark" viewBox="0 0 16 16">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door mr-1 text-primary" viewBox="0 0 16 16">
                                             <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
                                         </svg>
                                     </a>
@@ -381,9 +381,11 @@ $books = mysqli_query($conn, "SELECT * FROM buku LIMIT $start , $limit");
                                                                     <button type="button" class="btn btn-primary btn-sm mr-1">
                                                                         <a href="?card=<?= $book['id_buku'] ?>" class="text-white">Card</a>
                                                                     </button>
-                                                                    <button type="button" class="btn btn-warning btn-sm mr-1">
-                                                                        <a href="book_edit.php?id=<?= $book['id_buku'] ?>" class="text-white">Edit</a>
-                                                                    </button>
+                                                                    <a href="book_edit.php?id=<?= $book['id_buku'] ?>">
+                                                                        <button type="button" class="btn btn-warning btn-sm mr-1 text-white">
+                                                                            Edit
+                                                                        </button>
+                                                                    </a>
                                                                     <button type="button" class="btn btn-danger btn-sm mr-1" data-toggle="modal" data-target="#deleteModal<?= $book['id_buku'] ?>">
                                                                         <a class="text-white">Delete</a>
                                                                     </button>

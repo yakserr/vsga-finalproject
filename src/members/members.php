@@ -96,7 +96,7 @@ $members = mysqli_query($conn, "SELECT * FROM anggota LIMIT $start , $limit");
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Members</span>
+                                        <span>Anggota</span>
                                     </div>
                                 </a>
                             </li>
@@ -112,7 +112,7 @@ $members = mysqli_query($conn, "SELECT * FROM anggota LIMIT $start , $limit");
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Books</span>
+                                        <span>Buku</span>
                                     </div>
                                 </a>
                             </li>
@@ -142,7 +142,7 @@ $members = mysqli_query($conn, "SELECT * FROM anggota LIMIT $start , $limit");
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Borrow Transaction</span>
+                                        <span>Peminjaman</span>
                                     </div>
                                 </a>
                             </li>
@@ -159,7 +159,7 @@ $members = mysqli_query($conn, "SELECT * FROM anggota LIMIT $start , $limit");
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Return Transaction</span>
+                                        <span>Pengembalian</span>
                                     </div>
                                 </a>
                             </li>
@@ -181,7 +181,7 @@ $members = mysqli_query($conn, "SELECT * FROM anggota LIMIT $start , $limit");
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Report Transaction</span>
+                                        <span>Report Transaksi</span>
                                     </div>
                                 </a>
                             </li>
@@ -414,9 +414,11 @@ $members = mysqli_query($conn, "SELECT * FROM anggota LIMIT $start , $limit");
                                                                     <button type="button" class="btn btn-primary btn-sm mr-1">
                                                                         <a href="?card=<?= $member['id_anggota'] ?>" class="text-white">Card</a>
                                                                     </button>
-                                                                    <button type="button" class="btn btn-warning btn-sm mr-1">
-                                                                        <a href="member_edit.php?id=<?= $member['id_anggota'] ?>" class="text-white">Edit</a>
-                                                                    </button>
+                                                                    <a href="member_edit.php?id=<?= $member['id_anggota'] ?>">
+                                                                        <button type="button" class="btn btn-warning btn-sm mr-1 text-white">
+                                                                            Edit
+                                                                        </button>
+                                                                    </a>
                                                                     <button type="button" class="btn btn-danger btn-sm mr-1" data-toggle="modal" data-target="#deleteModal<?= $member['id_anggota'] ?>">
                                                                         <a class="text-white">Hapus</a>
                                                                     </button>
