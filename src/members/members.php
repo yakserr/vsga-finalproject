@@ -414,11 +414,17 @@ $members = mysqli_query($conn, "SELECT * FROM anggota LIMIT $start , $limit");
                                                                     <button type="button" class="btn btn-primary btn-sm mr-1">
                                                                         <a href="?card=<?= $member['id_anggota'] ?>" class="text-white">Card</a>
                                                                     </button>
+<<<<<<< HEAD
                                                                     <a href="member_edit.php?id=<?= $member['id_anggota'] ?>">
                                                                         <button type="button" class="btn btn-warning btn-sm mr-1 text-white">
                                                                             Edit
                                                                         </button>
                                                                     </a>
+=======
+                                                                    <button type="button" class="btn btn-warning btn-sm mr-1">
+                                                                        <a href="member_edit.php?id=<?= $member['id_anggota'] ?>" class="text-white">Edit</a>
+                                                                    </button>
+>>>>>>> 54832c02a3e3c8bda62bbae75f3e053c73800400
                                                                     <button type="button" class="btn btn-danger btn-sm mr-1" data-toggle="modal" data-target="#deleteModal<?= $member['id_anggota'] ?>">
                                                                         <a class="text-white">Hapus</a>
                                                                     </button>

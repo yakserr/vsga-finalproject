@@ -200,8 +200,8 @@ $book = mysqli_fetch_assoc($bookById);
                             <img width="35" src="../../assets/img/default.png" alt="">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Profile</a>
-                            <a class="dropdown-item" href="../auth/logout.php">Logout</a>
+                            <a class="dropdown-item" href="#">My Profile</a>
+                            <a class="dropdown-item" href="auth/logout.php">Logout</a>
                         </div>
                     </li>
                 </div>
@@ -241,8 +241,9 @@ $book = mysqli_fetch_assoc($bookById);
                                                                 <input type="text" class="form-control submit" id="judul" name="judul" value="<?= $book['judul'] ?>" required>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="keterangan">Keterangan</label>
-                                                                <textarea id="keterangan" name="keterangan" class="form-control" rows="6" required><?= $book['keterangan'] ?></textarea>
+                                                                <label for="description">Description</label>
+                                                                <textarea id="description" name="description" class="form-control" rows="3" required><?= $book['description'] ?>
+                                                                </textarea>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="pengarang">Pengarang</label>
