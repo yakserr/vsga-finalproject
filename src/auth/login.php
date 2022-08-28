@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
     } else {
         // session data
         $data = mysqli_fetch_assoc($admin_sql);
-        $_SESSION['id'] = $data['admin_id'];
+        $_SESSION['id'] = $data['id_admin'];
         $_SESSION['nama'] = $data['nama'];
         $_SESSION['email'] = $data['email'];
         $_SESSION['foto'] = $data['foto'];

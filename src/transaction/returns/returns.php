@@ -45,6 +45,7 @@ $transactions = mysqli_query(
             FROM transaksi t
             INNER JOIN buku b ON t.id_buku = b.id_buku
             WHERE t.tgl_kembali_asli IS NOT NULL
+            ORDER BY t.tgl_kembali_asli DESC
             LIMIT $start , $limit"
 );
 ?>

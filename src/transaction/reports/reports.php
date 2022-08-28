@@ -27,7 +27,8 @@ $transactions = mysqli_query(
                     t.tgl_pinjam as tgl_pinjam, t.tgl_kembali as tgl_kembali, t.tgl_kembali_asli as tgl_kembali_asli
             FROM transaksi t
             INNER JOIN anggota a ON t.id_anggota = a.id_anggota
-            INNER JOIN buku b ON t.id_buku = b.id_buku"
+            INNER JOIN buku b ON t.id_buku = b.id_buku
+            ORDER BY t.tgl_pinjam ASC"
 );
 
 $total_data = mysqli_num_rows($transactionsAll);

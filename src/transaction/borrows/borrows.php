@@ -31,6 +31,7 @@ $transactions = mysqli_query(
     "SELECT t.id_transaksi as id_transaksi, b.judul as judul, t.tgl_pinjam as tgl_pinjam, t.tgl_kembali as tgl_kembali 
             FROM transaksi t
             INNER JOIN buku b ON t.id_buku = b.id_buku 
+            ORDER BY t.tgl_pinjam DESC
             LIMIT $start , $limit"
 );
 ?>

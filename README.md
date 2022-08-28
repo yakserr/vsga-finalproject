@@ -1,5 +1,11 @@
 # Final Project
 
+Website link :
+<https://perpusvsga.000webhostapp.com/>
+
+email : admin@gmail.com
+password : password
+
 Buatlah SIM Perpus dengan modul sebagai berikut;
 
 1. Login. ✔
@@ -57,10 +63,16 @@ Buatlah SIM Perpus dengan modul sebagai berikut;
         |-- auth
         |-- books
         |-- members
+        |-- transaction
+            |-- borrows
+            |-- reports
+            |-- returns
+        |-- dashboard.php
     |-- vendor
     |-- config.php
     |-- helper.php
     |-- index.php
+    |-- Readme.md
 
 ## Detail of Folder
 
