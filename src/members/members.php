@@ -443,7 +443,7 @@ $members = mysqli_query($conn, "SELECT * FROM anggota LIMIT $start , $limit");
                                                             <td>
                                                                 <div class="d-flex flex-row">
                                                                     <button type="button" class="btn btn-primary btn-sm mr-1">
-                                                                        <a href="?card=<?= $member['id_anggota'] ?>" class="text-white">Card</a>
+                                                                        <a href="card.php?id=<?= $member['id_anggota'] ?>" class="text-white">Card</a>
                                                                     </button>
                                                                     <a href="member_edit.php?id=<?= $member['id_anggota'] ?>">
                                                                         <button type="button" class="btn btn-warning btn-sm mr-1 text-white">
