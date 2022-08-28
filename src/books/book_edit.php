@@ -241,8 +241,8 @@ $book = mysqli_fetch_assoc($bookById);
                                                                 <input type="text" class="form-control submit" id="judul" name="judul" value="<?= $book['judul'] ?>" required>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="description">Description</label>
-                                                                <textarea id="description" name="description" class="form-control" rows="3" required><?= $book['description'] ?>
+                                                                <label for="keterangan">Keterangan</label>
+                                                                <textarea id="keterangan" name="keterangan" class="form-control" rows="6" required><?= $book['keterangan'] ?>
                                                                 </textarea>
                                                             </div>
                                                             <div class="form-group">

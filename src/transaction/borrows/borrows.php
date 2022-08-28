@@ -26,7 +26,13 @@ $next = $page + 1;
 $total_data = mysqli_num_rows($transactionsAll);
 $total_page = ceil($total_data / $limit);
 
-$transactions = mysqli_query($conn, "SELECT * FROM transaksi LIMIT $start , $limit");
+$transactions = mysqli_query(
+    $conn,
+    "SELECT t.id_transaksi as id_transaksi, b.judul as judul, t.tgl_pinjam as tgl_pinjam, t.tgl_kembali as tgl_kembali 
+            FROM transaksi t
+            INNER JOIN buku b ON t.id_buku = b.id_buku 
+            LIMIT $start , $limit"
+);
 ?>
 
 <!doctype html>
@@ -79,7 +85,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transaksi LIMIT $start , $lim
 
                     <!-- Master Data -->
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Master Data</span>
+                        <span>Data Master</span>
                         <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
                             <span data-feather="plus-circle"></span>
                         </a>
@@ -96,7 +102,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transaksi LIMIT $start , $lim
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Members</span>
+                                        <span>Anggota</span>
                                     </div>
                                 </a>
                             </li>
@@ -112,7 +118,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transaksi LIMIT $start , $lim
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Books</span>
+                                        <span>Buku</span>
                                     </div>
                                 </a>
                             </li>
@@ -124,7 +130,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transaksi LIMIT $start , $lim
 
                     <!-- Transaction -->
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Transaction</span>
+                        <span>Transaksi</span>
                         <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
                             <span data-feather="plus-circle"></span>
                         </a>
@@ -142,7 +148,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transaksi LIMIT $start , $lim
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Borrow Transaction</span>
+                                        <span>Peminjaman</span>
                                     </div>
                                 </a>
                             </li>
@@ -159,7 +165,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transaksi LIMIT $start , $lim
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Return Transaction</span>
+                                        <span>Pengembalian</span>
                                     </div>
                                 </a>
                             </li>
@@ -181,7 +187,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transaksi LIMIT $start , $lim
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Report Transaction</span>
+                                        <span>Report Transaksi</span>
                                     </div>
                                 </a>
                             </li>
@@ -300,7 +306,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transaksi LIMIT $start , $lim
                                 <div>
                                     <div class="mb-4">
                                         <div class="header-table d-flex justify-content-between">
-                                            <h4 class="card-title">Information Borrow Transaction</h4>
+                                            <h4 class="card-title">Informasi Transaksi Peminjaman</h4>
                                             <div class="btn-toolbar mb-2 mb-md-0">
                                                 <li class="nav-item dropdown list-unstyled pr-0 pl-0">
                                                     <button type="button" class="nav-link dropdown-toggle border border-secondary bg-white text-muted" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -314,7 +320,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transaksi LIMIT $start , $lim
                                                 </li>
                                             </div>
                                         </div>
-                                        <p class="text-muted">Overview of detail information Borrow Transaction</p>
+                                        <p class="text-muted">Detail Informasi Peminjaman</p>
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
                                             Tambah
@@ -325,7 +331,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transaksi LIMIT $start , $lim
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="createModalLabel">Form Borrow Book</h5>
+                                                        <h5 class="modal-title" id="createModalLabel">Form Peminjaman Buku</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -397,20 +403,16 @@ $transactions = mysqli_query($conn, "SELECT * FROM transaksi LIMIT $start , $lim
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th>Kode Transaksi</th>
-                                                        <th>Member</th>
-                                                        <th>Book</th>
-                                                        <th>Borrow Date</th>
-                                                        <th>Return Date</th>
+                                                        <th>Buku</th>
+                                                        <th>Tgl Pinjam</th>
+                                                        <th>Tgl Kembali</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php foreach ($transactions as $transaction) : ?>
                                                         <tr class="text-nowrap">
-                                                            <td><?= $transaction['id_transaksi'] ?></td>
-                                                            <td><?= $transaction['id_anggota'] ?></td>
-                                                            <td><?= $transaction['id_buku'] ?></td>
+                                                            <td><?= $transaction['judul'] ?></td>
                                                             <td><?= $transaction['tgl_pinjam'] ?></td>
                                                             <td><?= $transaction['tgl_kembali'] ?></td>
                                                             <td>
@@ -430,13 +432,13 @@ $transactions = mysqli_query($conn, "SELECT * FROM transaksi LIMIT $start , $lim
                                                                             <div class="modal-dialog">
                                                                                 <div class="modal-content">
                                                                                     <div class="modal-header">
-                                                                                        <h5 class="modal-title" id="deleteModalLabel">Delete Data <?= $transaction['id_transaksi'] ?></h5>
+                                                                                        <h5 class="modal-title" id="deleteModalLabel">Hapus Data <?= $transaction['id_transaksi'] ?></h5>
                                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                             <span aria-hidden="true">&times;</span>
                                                                                         </button>
                                                                                     </div>
                                                                                     <div class="modal-body">
-                                                                                        Are you sure you want to delete this Transaction?
+                                                                                        Apakah anda yakin mau hapus data ini?
                                                                                     </div>
                                                                                     <div class=" modal-footer">
                                                                                         <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>

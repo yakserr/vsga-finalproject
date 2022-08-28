@@ -79,7 +79,7 @@ $members = mysqli_query($conn, "SELECT * FROM anggota LIMIT $start , $limit");
 
                     <!-- Master Data -->
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Master Data</span>
+                        <span>Data Master</span>
                         <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
                             <span data-feather="plus-circle"></span>
                         </a>
@@ -124,7 +124,7 @@ $members = mysqli_query($conn, "SELECT * FROM anggota LIMIT $start , $limit");
 
                     <!-- Transaction -->
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Transaction</span>
+                        <span>Transaksi</span>
                         <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
                             <span data-feather="plus-circle"></span>
                         </a>
@@ -350,6 +350,23 @@ $members = mysqli_query($conn, "SELECT * FROM anggota LIMIT $start , $limit");
                                                                             <input type="text" class="form-control" id="telp" name="telp" placeholder="No. Telp" required>
                                                                         </div>
                                                                         <div class="form-group">
+                                                                            <label for="telp">Jenis Kelamin</label>
+                                                                            <div class="radio-btn d-flex">
+                                                                                <div class="form-check mr-3">
+                                                                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin1" value="L">
+                                                                                    <label class="form-check-label" for="jenis_kelamin1">
+                                                                                        Laki-laki
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin2" value="P">
+                                                                                    <label class="form-check-label" for="jenis_kelamin2">
+                                                                                        Perempuan
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
                                                                             <label for="alamat">Alamat</label>
                                                                             <textarea id="alamat" name="alamat" placeholder="Alamat" class="form-control" rows="3" required></textarea>
                                                                         </div>
@@ -390,6 +407,7 @@ $members = mysqli_query($conn, "SELECT * FROM anggota LIMIT $start , $limit");
                                                         <th>Nama</th>
                                                         <th>Email</th>
                                                         <th>No Telp</th>
+                                                        <th>Jenis kelamin</th>
                                                         <th>Alamat</th>
                                                         <th>Aksi</th>
                                                     </tr>
@@ -408,23 +426,18 @@ $members = mysqli_query($conn, "SELECT * FROM anggota LIMIT $start , $limit");
                                                             <td><?= $member['nama'] ?></td>
                                                             <td><?= $member['email'] ?></td>
                                                             <td><?= $member['telp'] ?></td>
+                                                            <td><?= ($member['jenis_kelamin'] == 'L') ? 'Laki-laki' : 'Perempuan' ?></td>
                                                             <td><?= $member['alamat'] ?></td>
                                                             <td>
                                                                 <div class="d-flex flex-row">
                                                                     <button type="button" class="btn btn-primary btn-sm mr-1">
                                                                         <a href="?card=<?= $member['id_anggota'] ?>" class="text-white">Card</a>
                                                                     </button>
-<<<<<<< HEAD
                                                                     <a href="member_edit.php?id=<?= $member['id_anggota'] ?>">
                                                                         <button type="button" class="btn btn-warning btn-sm mr-1 text-white">
                                                                             Edit
                                                                         </button>
                                                                     </a>
-=======
-                                                                    <button type="button" class="btn btn-warning btn-sm mr-1">
-                                                                        <a href="member_edit.php?id=<?= $member['id_anggota'] ?>" class="text-white">Edit</a>
-                                                                    </button>
->>>>>>> 54832c02a3e3c8bda62bbae75f3e053c73800400
                                                                     <button type="button" class="btn btn-danger btn-sm mr-1" data-toggle="modal" data-target="#deleteModal<?= $member['id_anggota'] ?>">
                                                                         <a class="text-white">Hapus</a>
                                                                     </button>

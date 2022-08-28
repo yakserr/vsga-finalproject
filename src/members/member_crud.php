@@ -21,6 +21,7 @@ if (isset($_POST['submit'])) {
         $email = $_POST['email'];
         $telp = $_POST['telp'];
         $alamat = $_POST['alamat'];
+        $jenis_kelamin = $_POST['jenis_kelamin'];
 
         // Member Code
         $sql = mysqli_query($conn, "SELECT id_anggota as id FROM anggota ORDER BY id_anggota DESC LIMIT 1");
@@ -53,7 +54,7 @@ if (isset($_POST['submit'])) {
                     move_uploaded_file($image_file["tmp_name"], "../../assets/img/profile_user/" . $uniqueNameImage);
 
                     // save the data into the database
-                    $sql = mysqli_query($conn, "INSERT INTO anggota (kode_anggota, nama, email, telp, foto, alamat) VALUES ( '$kode_anggota' ,'$nama', '$email', '$telp', '$uniqueNameImage', '$alamat')");
+                    $sql = mysqli_query($conn, "INSERT INTO anggota (kode_anggota, nama, email, telp, foto, alamat, jenis_kelamin) VALUES ( '$kode_anggota' ,'$nama', '$email', '$telp', '$uniqueNameImage', '$alamat', '$jenis_kelamin' )");
 
                     // if the data is saved into the database
                     if ($sql) {
@@ -68,7 +69,7 @@ if (isset($_POST['submit'])) {
         } else {
 
             // save the data into the database
-            $sql = mysqli_query($conn, "INSERT INTO anggota (kode_anggota, nama, email, telp, alamat) VALUES ( '$kode_anggota' ,'$nama', '$email', '$telp', '$alamat')");
+            $sql = mysqli_query($conn, "INSERT INTO anggota (kode_anggota, nama, email, telp, alamat, jenis_kelamin) VALUES ( '$kode_anggota' ,'$nama', '$email', '$telp', '$alamat', '$jenis_kelamin' )");
 
             // if the data is saved into the database
             if ($sql) {
@@ -88,6 +89,7 @@ if (isset($_POST['submit'])) {
         $email = $_POST['email'];
         $telp = $_POST['telp'];
         $alamat = $_POST['alamat'];
+        $jenis_kelamin = $_POST['jenis_kelamin'];
 
         // image process
         // check if the image is uploaded
@@ -123,13 +125,13 @@ if (isset($_POST['submit'])) {
                     // delete the old image
                     unlink($image_path_old);
                     // save the data into the database
-                    $sql = mysqli_query($conn, "UPDATE anggota SET nama = '$nama', email = '$email', telp = '$telp', foto = '$uniqueNameImage', alamat = '$alamat' WHERE id_anggota = '$id'");
+                    $sql = mysqli_query($conn, "UPDATE anggota SET nama = '$nama', email = '$email', telp = '$telp', foto = '$uniqueNameImage', alamat = '$alamat', jenis_kelamin = '$jenis_kelamin' WHERE id_anggota = '$id'");
                     header('location: members.php?success=update');
                 }
             }
         } else {
             // save the data into the database
-            $sql = mysqli_query($conn, "UPDATE anggota SET nama = '$nama', email = '$email', telp = '$telp', alamat = '$alamat' WHERE id_anggota = '$id'");
+            $sql = mysqli_query($conn, "UPDATE anggota SET nama = '$nama', email = '$email', telp = '$telp', alamat = '$alamat', jenis_kelamin = '$jenis_kelamin' WHERE id_anggota = '$id'");
             header('location: members.php?success=update');
         }
     }

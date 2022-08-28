@@ -60,9 +60,7 @@ if (isset($_POST['submit'])) {
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
-    }
-    // if the form submit is delete
-    else if ($_POST['submit'] === 'delete') {
+    } else if ($_POST['submit'] === 'delete') {
 
         // take the data from the form and put it into variables
         $id = $_POST['id'];

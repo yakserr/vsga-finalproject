@@ -79,7 +79,7 @@ $books = mysqli_query($conn, "SELECT * FROM buku LIMIT $start , $limit");
 
                     <!-- Master Data -->
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Master Data</span>
+                        <span>Data Master</span>
                         <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
                             <span data-feather="plus-circle"></span>
                         </a>
@@ -124,7 +124,7 @@ $books = mysqli_query($conn, "SELECT * FROM buku LIMIT $start , $limit");
 
                     <!-- Transaction -->
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Transaction</span>
+                        <span>Transaksi</span>
                         <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
                             <span data-feather="plus-circle"></span>
                         </a>
@@ -210,11 +210,7 @@ $books = mysqli_query($conn, "SELECT * FROM buku LIMIT $start , $limit");
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Profile</a>
-<<<<<<< HEAD
                             <a class="dropdown-item" href="../auth/logout.php">Logout</a>
-=======
-                            <a class="dropdown-item" href="auth/logout.php">Logout</a>
->>>>>>> 54832c02a3e3c8bda62bbae75f3e053c73800400
                         </div>
                     </li>
                 </div>
@@ -385,17 +381,11 @@ $books = mysqli_query($conn, "SELECT * FROM buku LIMIT $start , $limit");
                                                                     <button type="button" class="btn btn-primary btn-sm mr-1">
                                                                         <a href="?card=<?= $book['id_buku'] ?>" class="text-white">Card</a>
                                                                     </button>
-<<<<<<< HEAD
                                                                     <a href="book_edit.php?id=<?= $book['id_buku'] ?>">
                                                                         <button type="button" class="btn btn-warning btn-sm mr-1 text-white">
                                                                             Edit
                                                                         </button>
                                                                     </a>
-=======
-                                                                    <button type="button" class="btn btn-warning btn-sm mr-1">
-                                                                        <a href="book_edit.php?id=<?= $book['id_buku'] ?>" class="text-white">Edit</a>
-                                                                    </button>
->>>>>>> 54832c02a3e3c8bda62bbae75f3e053c73800400
                                                                     <button type="button" class="btn btn-danger btn-sm mr-1" data-toggle="modal" data-target="#deleteModal<?= $book['id_buku'] ?>">
                                                                         <a class="text-white">Delete</a>
                                                                     </button>

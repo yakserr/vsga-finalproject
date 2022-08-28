@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
     }
 
     // if the form submit is update
-    if ($_POST['submit'] === 'update') {
+    else if ($_POST['submit'] === 'update') {
 
         $id = $_POST['id'];
         $buku = $_POST['buku'];
@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
     }
 
     // if the form submit is delete
-    if ($_POST['submit'] === 'delete') {
+    else if ($_POST['submit'] === 'delete') {
 
         $id = $_POST['id'];
 

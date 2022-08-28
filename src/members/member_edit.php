@@ -253,6 +253,23 @@ $member = mysqli_fetch_assoc($memberById);
                                                                 <input type="text" class="form-control" id="telp" name="telp" value="<?= $member['telp'] ?>" required>
                                                             </div>
                                                             <div class="form-group">
+                                                                <label for="telp">Jenis Kelamin</label>
+                                                                <div class="radio-btn d-flex">
+                                                                    <div class="form-check mr-3">
+                                                                        <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin1" value="L" <?= ($member['jenis_kelamin'] === "L") ? 'checked' : ''; ?>>
+                                                                        <label class="form-check-label" for="jenis_kelamin1">
+                                                                            Laki-laki
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin2" value="P" <?= ($member['jenis_kelamin'] === "P") ? 'checked' : ''; ?>>
+                                                                        <label class="form-check-label" for="jenis_kelamin2">
+                                                                            Perempuan
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
                                                                 <label for="alamat">Alamat</label>
                                                                 <textarea id="alamat" name="alamat" class="form-control" rows="3" required><?= $member['alamat'] ?></textarea>
                                                             </div>
