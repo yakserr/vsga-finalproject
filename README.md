@@ -2,15 +2,15 @@
 
 Buatlah SIM Perpus dengan modul sebagai berikut;
 
-1. Login.
-2. Beranda.
-3. Anggota-list.
-4. Anggota-form.
+1. Login. ✔
+2. Beranda.✔
+3. Anggota-list.✔
+4. Anggota-form.✔
 5. Cetak kartu.
-6. Buku-list.
-7. Buku-form.
-8. Transaksi-list.
-9. Transaksi-form.
+6. Buku-list.✔
+7. Buku-form.✔
+8. Transaksi-list.✔
+9. Transaksi-form.✔
 10. Cetak laporan (peminjaman & pengembalian).
 
 ## Final Project Spec DB
