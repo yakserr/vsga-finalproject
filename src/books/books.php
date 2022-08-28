@@ -256,7 +256,7 @@ $books = mysqli_query($conn, "SELECT * FROM buku LIMIT $start , $limit");
                                 </li>
                                 <li class="mr-1">/</li>
                                 <li class="mr-1 align-bottom">
-                                    <a class="text-decoration-none text-dark">Master Data</a>
+                                    <a class="text-decoration-none text-dark">Data Master</a>
                                 </li>
                                 <li class="mr-1">/</li>
                                 <li class="mr-1 align-bottom">
@@ -358,6 +358,7 @@ $books = mysqli_query($conn, "SELECT * FROM buku LIMIT $start , $limit");
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
+                                                        <th>No</th>
                                                         <th>Kode Buku</th>
                                                         <th>Judul</th>
                                                         <th>Keterangan</th>
@@ -368,8 +369,9 @@ $books = mysqli_query($conn, "SELECT * FROM buku LIMIT $start , $limit");
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php foreach ($books as $book) : ?>
+                                                    <?php foreach ($books as $key => $book) : ?>
                                                         <tr class="text-nowrap">
+                                                            <td><?= ++$key ?></td>
                                                             <td><?= $book['kode_buku'] ?></td>
                                                             <td><?= $book['judul'] ?></td>
                                                             <td><?= strlen($book['keterangan']) > 70 ? substr($book['keterangan'], 0, 70) . "..." : $book['keterangan']; ?></td>

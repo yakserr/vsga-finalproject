@@ -278,7 +278,7 @@ $members = mysqli_query($conn, "SELECT * FROM anggota LIMIT $start , $limit");
                                 </li>
                                 <li class="mr-1">/</li>
                                 <li class="mr-1 align-bottom">
-                                    <a class="text-decoration-none text-dark">Master Data</a>
+                                    <a class="text-decoration-none text-dark">Data Master</a>
                                 </li>
                                 <li class="mr-1">/</li>
                                 <li class="mr-1 align-bottom">
@@ -402,6 +402,7 @@ $members = mysqli_query($conn, "SELECT * FROM anggota LIMIT $start , $limit");
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
+                                                        <th>No</th>
                                                         <th>Kode Anggota</th>
                                                         <th>Foto</th>
                                                         <th>Nama</th>
@@ -413,8 +414,9 @@ $members = mysqli_query($conn, "SELECT * FROM anggota LIMIT $start , $limit");
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php foreach ($members as $member) : ?>
+                                                    <?php foreach ($members as $key => $member) : ?>
                                                         <tr class="text-nowrap">
+                                                            <td><?= ++$key ?></td>
                                                             <td><?= $member['kode_anggota'] ?></td>
                                                             <td>
                                                                 <?php if ($member['foto']) : ?>

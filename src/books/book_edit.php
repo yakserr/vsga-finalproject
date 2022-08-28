@@ -70,7 +70,7 @@ $book = mysqli_fetch_assoc($bookById);
 
                     <!-- Master Data -->
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Master Data</span>
+                        <span>Data Master</span>
                         <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
                             <span data-feather="plus-circle"></span>
                         </a>
@@ -87,7 +87,7 @@ $book = mysqli_fetch_assoc($bookById);
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Members</span>
+                                        <span>Anggota</span>
                                     </div>
                                 </a>
                             </li>
@@ -103,7 +103,7 @@ $book = mysqli_fetch_assoc($bookById);
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Books</span>
+                                        <span>Buku</span>
                                     </div>
                                 </a>
                             </li>
@@ -115,7 +115,7 @@ $book = mysqli_fetch_assoc($bookById);
 
                     <!-- Transaction -->
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Transaction</span>
+                        <span>Transaksi</span>
                         <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
                             <span data-feather="plus-circle"></span>
                         </a>
@@ -133,7 +133,7 @@ $book = mysqli_fetch_assoc($bookById);
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Borrow Transaction</span>
+                                        <span>peminjaman</span>
                                     </div>
                                 </a>
                             </li>
@@ -150,7 +150,7 @@ $book = mysqli_fetch_assoc($bookById);
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Return Transaction</span>
+                                        <span>Return Transaksi</span>
                                     </div>
                                 </a>
                             </li>
@@ -242,8 +242,7 @@ $book = mysqli_fetch_assoc($bookById);
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="keterangan">Keterangan</label>
-                                                                <textarea id="keterangan" name="keterangan" class="form-control" rows="6" required><?= $book['keterangan'] ?>
-                                                                </textarea>
+                                                                <textarea id="keterangan" name="keterangan" class="form-control" rows="6" required><?= $book['keterangan'] ?></textarea>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="pengarang">Pengarang</label>

@@ -273,7 +273,7 @@ $member = mysqli_fetch_assoc($member);
                                                                 <label for="buku">Buku</label>
                                                                 <select class="custom-select" name="buku" id="buku">
                                                                     <?php foreach ($books as $book) : ?>
-                                                                        <option value="<?= $book['id_buku'] ?>" <?php ($book['id_buku'] == $transaction['id_buku']) ? 'selected' : ''; ?>>
+                                                                        <option value="<?= $book['id_buku'] ?>" <?= ($book['id_buku'] == $transaction['id_buku']) ? 'selected' : ''; ?>>
                                                                             <?= $book['kode_buku'] . " " . $book['judul'] ?>
                                                                         </option>
                                                                     <?php endforeach ?>

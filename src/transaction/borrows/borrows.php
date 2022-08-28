@@ -369,7 +369,7 @@ $transactions = mysqli_query(
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
                                                                                     <label for="pinjam">Tgl Pinjam</label>
-                                                                                    <input type="date" name="pinjam" class="form-control" id="pinjam" onchange="returnDate()">
+                                                                                    <input type="date" name="pinjam" class="form-control" id="pinjam" onchange="returnDate()" required>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5">
@@ -403,6 +403,7 @@ $transactions = mysqli_query(
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
+                                                        <th>No</th>
                                                         <th>Buku</th>
                                                         <th>Tgl Pinjam</th>
                                                         <th>Tgl Kembali</th>
@@ -410,8 +411,9 @@ $transactions = mysqli_query(
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php foreach ($transactions as $transaction) : ?>
+                                                    <?php foreach ($transactions as $key => $transaction) : ?>
                                                         <tr class="text-nowrap">
+                                                            <td><?= ++$key ?></td>
                                                             <td><?= $transaction['judul'] ?></td>
                                                             <td><?= $transaction['tgl_pinjam'] ?></td>
                                                             <td><?= $transaction['tgl_kembali'] ?></td>

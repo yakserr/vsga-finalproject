@@ -10,11 +10,6 @@ if (isset($_SESSION['is_logged_in']) === false) {
     header("location:../../auth/login.php");
 }
 
-// query to get all transactions
-$transactionsAll = mysqli_query($conn, "SELECT * FROM transactions");
-$books = mysqli_query($conn, "SELECT * FROM books");
-$members = mysqli_query($conn, "SELECT * FROM members");
-
 // pagination
 $limit = 10;
 $page = $_GET['page'] ??  1;
@@ -23,10 +18,35 @@ $start = ($page - 1) * $limit;
 $prev = $page - 1 == 0 ? 1 : $page - 1;
 $next = $page + 1;
 
+// query to get all transactions
+$transactionsAll = mysqli_query($conn, "SELECT * FROM transaksi WHERE tgl_kembali_asli IS NOT NULL");
+
+$ftrans = mysqli_query(
+    $conn,
+    "SELECT t.id_transaksi as id_transaksi, b.id_buku as id_buku, b.judul as judul, a.id_anggota as id_anggota, a.nama as nama,
+                    t.tgl_pinjam as tgl_pinjam, t.tgl_kembali as tgl_kembali
+            FROM transaksi t
+            INNER JOIN anggota a ON t.id_anggota = a.id_anggota
+            INNER JOIN buku b ON t.id_buku = b.id_buku
+            WHERE t.tgl_kembali_asli IS NULL"
+);
+
+
 $total_data = mysqli_num_rows($transactionsAll);
 $total_page = ceil($total_data / $limit);
 
-$transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $limit");
+
+// $transactions = mysqli_query($conn, "SELECT * FROM transaksi LIMIT $start , $limit");
+$transactions = mysqli_query(
+    $conn,
+    "SELECT t.id_transaksi as id_transaksi, b.kode_buku as kode_buku, b.judul as judul,
+                    t.tgl_pinjam as tgl_pinjam, t.tgl_kembali as tgl_kembali,
+                    t.tgl_kembali_asli as tgl_kembali_asli
+            FROM transaksi t
+            INNER JOIN buku b ON t.id_buku = b.id_buku
+            WHERE t.tgl_kembali_asli IS NOT NULL
+            LIMIT $start , $limit"
+);
 ?>
 
 <!doctype html>
@@ -79,7 +99,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
 
                     <!-- Master Data -->
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Master Data</span>
+                        <span>Data Master</span>
                         <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
                             <span data-feather="plus-circle"></span>
                         </a>
@@ -96,7 +116,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Members</span>
+                                        <span>Anggota</span>
                                     </div>
                                 </a>
                             </li>
@@ -112,7 +132,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Books</span>
+                                        <span>Buku</span>
                                     </div>
                                 </a>
                             </li>
@@ -124,7 +144,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
 
                     <!-- Transaction -->
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Transaction</span>
+                        <span>Transaksi</span>
                         <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
                             <span data-feather="plus-circle"></span>
                         </a>
@@ -134,7 +154,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
                         <!-- Borrow Transaction -->
                         <div class="menu-sidebar p-2 ">
                             <li class="nav-item">
-                                <a class="nav-link active d-flex" href="borrows.php">
+                                <a class="nav-link d-flex" href="../borrows/borrows.php">
                                     <div class="icon align-middle">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
@@ -142,7 +162,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Borrow Transaction</span>
+                                        <span>Peminjaman</span>
                                     </div>
                                 </a>
                             </li>
@@ -151,7 +171,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
                         <!-- Return Transaction -->
                         <div class="menu-sidebar p-2 ">
                             <li class="nav-item">
-                                <a class="nav-link d-flex" href="../returns/returns.php">
+                                <a class="nav-link active d-flex" href="../returns/returns.php">
                                     <div class="icon align-middle">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -159,7 +179,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Return Transaction</span>
+                                        <span>Pengembalian</span>
                                     </div>
                                 </a>
                             </li>
@@ -181,7 +201,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
                                         </svg>
                                     </div>
                                     <div class=" ml-2 text">
-                                        <span>Report Transaction</span>
+                                        <span>Report Transaksi</span>
                                     </div>
                                 </a>
                             </li>
@@ -210,7 +230,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">My Profile</a>
-                            <a class="dropdown-item" href="auth/logout.php">Logout</a>
+                            <a class="dropdown-item" href="../../auth/logout.php">Logout</a>
                         </div>
                     </li>
                 </div>
@@ -231,11 +251,11 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
                             </div>
                             <div class="toast-body">
                                 <?php if ($_GET['success'] == 'create') : ?>
-                                    <p class="">Data successfully <span class="text-success">Created</span> !</p>
+                                    <p class="">Data berhasil <span class="text-success">Dibuat</span> !</p>
                                 <?php elseif ($_GET['success'] == 'update') : ?>
-                                    <p class="">Data successfully <span class="text-warning">Updated</span> !</p>
+                                    <p class="">Data berhasil <span class="text-warning">Diubah</span> !</p>
                                 <?php elseif ($_GET['success'] == 'delete') : ?>
-                                    <p class="">Data successfully <span class="text-danger">Deleted</span> !</p>
+                                    <p class="">Data berhasil <span class="text-danger">Dihapus</span> !</p>
                                 <?php endif ?>
                             </div>
                         </div>
@@ -254,9 +274,9 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
                             </div>
                             <div class="toast-body">
                                 <?php if ($_GET['error'] == 'image_size') : ?>
-                                    <p class="text-danger"> Image size is too large !</p>
+                                    <p class="text-danger"> Ukuran Foto/Gambar terlalu besar !</p>
                                 <?php elseif ($_GET['error'] == 'image_type') : ?>
-                                    <p class="text-danger"> Image type is not supported !</p>
+                                    <p class="text-danger"> Tipe Foto/Gambar tidak cocok !</p>
                                 <?php endif ?>
                             </div>
                         </div>
@@ -278,15 +298,15 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
                                 </li>
                                 <li class="mr-1">/</li>
                                 <li class="mr-1 align-bottom">
-                                    <a class="text-decoration-none text-dark">Transaction</a>
+                                    <a class="text-decoration-none text-dark">Transaksi</a>
                                 </li>
                                 <li class="mr-1">/</li>
                                 <li class="mr-1 align-bottom">
-                                    <a href="borrows.php" class="text-decoration-none">Borrow Transaction</a>
+                                    <a href="borrows.php" class="text-decoration-none">Pengembalian</a>
                                 </li>
                             </ol>
                         </div>
-                        <h3 class="font-weight-bolder">Borrow Transaction</h3>
+                        <h3 class="font-weight-bolder">Pengembalian</h3>
                     </div>
                 </div>
 
@@ -300,7 +320,7 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
                                 <div>
                                     <div class="mb-4">
                                         <div class="header-table d-flex justify-content-between">
-                                            <h4 class="card-title">Information Borrow Transaction</h4>
+                                            <h4 class="card-title">Informasi Transaksi pengembalian</h4>
                                             <div class="btn-toolbar mb-2 mb-md-0">
                                                 <li class="nav-item dropdown list-unstyled pr-0 pl-0">
                                                     <button type="button" class="nav-link dropdown-toggle border border-secondary bg-white text-muted" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -314,10 +334,10 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
                                                 </li>
                                             </div>
                                         </div>
-                                        <p class="text-muted">Overview of detail information Borrow Transaction</p>
+                                        <p class="text-muted">Detail informasi Transaksi Pengembalian</p>
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
-                                            Create
+                                            Tambah
                                         </button>
 
                                         <!-- Modal -->
@@ -325,36 +345,25 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="createModalLabel">Form Borrow Book</h5>
+                                                        <h5 class="modal-title" id="createModalLabel">Form Pengembalian Buku</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
                                                     <!-- Form Create Modal -->
-                                                    <form action="borrow_crud.php" method="POST">
+                                                    <form action="return_crud.php" method="POST">
                                                         <div class="modal-body">
                                                             <div class="container">
                                                                 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
                                                                 <div class="row">
                                                                     <div class="col-md-10">
                                                                         <div class="form-group">
-                                                                            <label for="book">Book</label>
-                                                                            <select class="custom-select" name="book" id="book">
-                                                                                <option selected>Choose Book</option>
-                                                                                <?php foreach ($books as $book) : ?>
-                                                                                    <option value="<?= $book['book_id'] ?>">
-                                                                                        <?= $book['book_code'] . " " . $book['title'] ?>
-                                                                                    </option>
-                                                                                <?php endforeach ?>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="member">Member</label>
-                                                                            <select class="custom-select" name="member" id="member">
-                                                                                <option selected>Choose member</option>
-                                                                                <?php foreach ($members as $member) : ?>
-                                                                                    <option value="<?= $member['member_id'] ?>">
-                                                                                        <?= $member['member_code'] . " " . $member['name'] ?>
+                                                                            <label for="idTrx_buku">Anggota - Buku</label>
+                                                                            <select class="custom-select" name="idTrx_buku" id="idTrx_buku">
+                                                                                <option selected>Silahkan Pilih</option>
+                                                                                <?php foreach ($ftrans as $ftran) : ?>
+                                                                                    <option value="<?= $ftran['id_transaksi'] ?>" id="option" date-pinjam="<?= $ftran['tgl_pinjam'] ?>">
+                                                                                        <?= $ftran['nama'] . " - " . $ftran['judul'] ?>
                                                                                     </option>
                                                                                 <?php endforeach ?>
                                                                             </select>
@@ -362,23 +371,42 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
                                                                         <div class="row">
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
-                                                                                    <label for="borrow">Date Borrow</label>
-                                                                                    <input type="date" name="borrow" class="form-control" id="borrow" onchange="returnDate()">
+                                                                                    <label for="tgl_pinjam">tgl_pinjam</label>
+                                                                                    <input type="text" class="form-control submit" id="tgl_pinjam" name="tgl_pinjam" disabled>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
-                                                                                    <label for="return">Books Should Return in 7 Days</label>
-                                                                                    <input type="text" name="return" class="form-control border border-success" id="return">
+                                                                                    <label for="tgl_kembali_asli">Tgl Kembali Asli</label>
+                                                                                    <input type="date" name="tgl_kembali_asli" class="form-control" id="tgl_kembali_asli" onchange="sendData()" required>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-2">
+                                                                                <div class="form-group">
+                                                                                    <label for="telat">
+                                                                                        Telat
+                                                                                    </label>
+                                                                                    <input type="text" name="telat" class="form-control border border-success" id="telat">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row justify-content-end">
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <label for="denda">
+                                                                                        Total Denda (Rp.2000@days)
+                                                                                    </label>
+                                                                                    <input type="text" name="denda" class="form-control border border-success" id="denda">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                                                     <button type="submit" class="btn btn-primary" name="submit" value='create'>
-                                                                        Create
+                                                                        Tambah
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -395,44 +423,62 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th>Transaction Code</th>
-                                                        <th>Member</th>
-                                                        <th>Book</th>
-                                                        <th>Borrow Date</th>
-                                                        <th>Return Date</th>
+                                                        <th>No</th>
+                                                        <th>Buku</th>
+                                                        <th>Tgl Pinjam</th>
+                                                        <th>Tgl Kembali</th>
+                                                        <th>Tgl Kembali Asli</th>
+                                                        <th>Status</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php foreach ($transactions as $transaction) : ?>
+                                                    <?php foreach ($transactions as $key => $transaction) : ?>
                                                         <tr class="text-nowrap">
-                                                            <td><?= $transaction['transaction_code'] ?></td>
-                                                            <td><?= $transaction['member_id'] ?></td>
-                                                            <td><?= $transaction['book_id'] ?></td>
-                                                            <td><?= $transaction['borrow_date'] ?></td>
-                                                            <td><?= $transaction['return_date'] ?></td>
+                                                            <td><?= ++$key ?></td>
+                                                            <td><?= $transaction['judul'] ?></td>
+                                                            <td><?= $transaction['tgl_pinjam'] ?></td>
+                                                            <td><?= $transaction['tgl_kembali'] ?></td>
+                                                            <td><?= $transaction['tgl_kembali_asli'] ?></td>
+                                                            <td>
+                                                                <?php
+                                                                $tgl_kembali = new DateTime($transaction['tgl_kembali']);
+                                                                $tgl_kembali_asli = new DateTime($transaction['tgl_kembali_asli']);
+                                                                $interval = date_diff($tgl_kembali_asli, $tgl_kembali);
+                                                                ?>
+
+                                                                <?php if ($transaction['tgl_kembali_asli'] == null) : ?>
+                                                                    <span class="badge badge-danger">Belum Kembali</span>
+                                                                <?php elseif ($interval->format('%R%a') < 0) : ?>
+                                                                    <span class="badge badge-danger">Terlambat <?= $interval->format('%a Hari') ?></span>
+                                                                <?php else : ?>
+                                                                    <span class="badge badge-success">Tepat Waktu</span>
+                                                                <?php endif ?>
+
+
+                                                            </td>
                                                             <td>
                                                                 <div class="d-flex flex-row">
                                                                     <button type="button" class="btn btn-warning btn-sm mr-1">
-                                                                        <a href="borrow_edit.php?id=<?= $transaction['transaction_id'] ?>" class="text-white">Edit</a>
+                                                                        <a href="return_edit.php?id=<?= $transaction['id_transaksi'] ?>" class="text-white">Edit</a>
                                                                     </button>
-                                                                    <button type="button" class="btn btn-danger btn-sm mr-1" data-toggle="modal" data-target="#deleteModal<?= $transaction['transaction_id'] ?>">
+                                                                    <button type="button" class="btn btn-danger btn-sm mr-1" data-toggle="modal" data-target="#deleteModal<?= $transaction['id_transaksi'] ?>">
                                                                         <a class="text-white">Delete</a>
                                                                     </button>
                                                                     <!-- Modal -->
-                                                                    <form action="borrow_crud.php" method="POST">
-                                                                        <input type="hidden" name="id" value="<?= $transaction['transaction_id'] ?>" />
-                                                                        <div class=" modal fade" id="deleteModal<?= $transaction['transaction_id'] ?>" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                                    <form action="return_crud.php" method="POST">
+                                                                        <input type="hidden" name="id" value="<?= $transaction['id_transaksi'] ?>" />
+                                                                        <div class=" modal fade" id="deleteModal<?= $transaction['id_transaksi'] ?>" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                                                             <div class="modal-dialog">
                                                                                 <div class="modal-content">
                                                                                     <div class="modal-header">
-                                                                                        <h5 class="modal-title" id="deleteModalLabel">Delete Data <?= $transaction['transaction_code'] ?></h5>
+                                                                                        <h5 class="modal-title" id="deleteModalLabel">Hapus Data <?= $transaction['id_transaksi'] ?></h5>
                                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                             <span aria-hidden="true">&times;</span>
                                                                                         </button>
                                                                                     </div>
                                                                                     <div class="modal-body">
-                                                                                        Are you sure you want to delete this Transaction?
+                                                                                        Apakah anda yakin mau hapus data ini?
                                                                                     </div>
                                                                                     <div class=" modal-footer">
                                                                                         <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
@@ -517,14 +563,27 @@ $transactions = mysqli_query($conn, "SELECT * FROM transactions LIMIT $start , $
     </script>
 
     <script>
+        // function returnDate
         function returnDate() {
-            const borrowDate = document.getElementById("borrow").value;
-            let returnDate = document.getElementById("return");
+            const borrowDate = document.getElementById("pinjam").value;
+            let returnDate = document.getElementById("kembali");
             const date = new Date(borrowDate);
 
             resultDate = date.setDate(date.getDate() + 7)
 
             returnDate.value = new Date(resultDate).toLocaleDateString('en-ZA');
+        }
+
+        function sendData() {
+            const tgl_kembali_asli = document.getElementById("tgl_kembali_asli");
+            const tgl_pinjam = document.getElementById("tgl_pinjam");
+            const option = document.getElementById("option");
+            const data_pinjam = option.getAttribute('date-pinjam');
+            const telat = document.getElementById("telat");
+            const denda = document.getElementById("denda");
+
+            tgl_pinjam.value = data_pinjam;
+
         }
     </script>
 </body>
