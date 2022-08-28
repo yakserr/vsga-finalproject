@@ -208,7 +208,7 @@ $transaction = mysqli_fetch_assoc($transaction);
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">My Profile</a>
-                            <a class="dropdown-item" href="auth/logout.php">Logout</a>
+                            <a class="dropdown-item" href="../../auth/logout.php">Logout</a>
                         </div>
                     </li>
                 </div>
