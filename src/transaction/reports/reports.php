@@ -51,6 +51,16 @@ $total_page = ceil($total_data / $limit);
 
     <!-- Custom styles for this template -->
     <link href="../../../assets/css/styles.css" rel="stylesheet">
+
+    <!-- datatables -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 </head>
 
 <body>
@@ -259,24 +269,12 @@ $total_page = ceil($total_data / $limit);
                                     <div class="mb-4">
                                         <div class="header-table d-flex justify-content-between">
                                             <h4 class="card-title">Detail Report Transaksi</h4>
-                                            <div class="btn-toolbar mb-2 mb-md-0">
-                                                <li class="nav-item dropdown list-unstyled pr-0 pl-0">
-                                                    <button type="button" class="nav-link dropdown-toggle border border-secondary bg-white text-muted" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <span data-feather="calendar"></span>
-                                                        This week
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                                        <a class="dropdown-item" href="#">Share</a>
-                                                        <a class="dropdown-item" href="auth/logout.php">Export</a>
-                                                    </div>
-                                                </li>
-                                            </div>
                                         </div>
                                         <p class="text-muted">Detail Report Transaksi</p>
 
                                         <!-- title -->
                                         <div class="table-responsive mb-2">
-                                            <table class="table table-striped">
+                                            <table class="table table-striped" id="mauexport">
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
@@ -385,6 +383,26 @@ $total_page = ceil($total_data / $limit);
             $('.toast').toast('show');
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#mauexport').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel', 'pdf', 'print'
+                ]
+            });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
 
     <script>
         // function returnDate

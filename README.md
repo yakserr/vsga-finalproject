@@ -76,3 +76,8 @@ Buatlah SIM Perpus dengan modul sebagai berikut;
 | ---------- | -------------------------------------------------------- |
 | config.php | File containing configuration information and connection |
 | helper.php | File containing Function                                 |
+
+## resources
+
+<https://datatables.net/>
+<https://www.youtube.com/watch?v=qVSa5v6_nuA&ab_channel=Richard%27sLab>

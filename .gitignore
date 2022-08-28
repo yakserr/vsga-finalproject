@@ -1,2 +1,6 @@
 # ignore all files img anggota
 assets/img/profile_user/
+
+# vendor
+vendor/
+!vendor/data
