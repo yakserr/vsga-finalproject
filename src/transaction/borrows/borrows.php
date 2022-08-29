@@ -12,7 +12,7 @@ if (isset($_SESSION['is_logged_in']) === false) {
 
 // query to get all transactions
 $transactionsAll = mysqli_query($conn, "SELECT * FROM transaksi");
-$books = mysqli_query($conn, "SELECT * FROM buku");
+$books = mysqli_query($conn, "SELECT * FROM buku WHERE status = 'Available'");
 $members = mysqli_query($conn, "SELECT * FROM anggota");
 
 // pagination
@@ -28,7 +28,7 @@ $total_page = ceil($total_data / $limit);
 
 $transactions = mysqli_query(
     $conn,
-    "SELECT t.id_transaksi as id_transaksi, b.judul as judul, t.tgl_pinjam as tgl_pinjam, t.tgl_kembali as tgl_kembali 
+    "SELECT t.id_transaksi as id_transaksi, b.id_buku as id_buku, b.judul as judul, t.tgl_pinjam as tgl_pinjam, t.tgl_kembali as tgl_kembali 
             FROM transaksi t
             INNER JOIN buku b ON t.id_buku = b.id_buku 
             ORDER BY t.tgl_pinjam DESC
@@ -356,8 +356,8 @@ $transactions = mysqli_query(
                                                                     <div class="col-md-10">
                                                                         <div class="form-group">
                                                                             <label for="anggota">Anggota</label>
-                                                                            <select class="custom-select" name="anggota" id="anggota">
-                                                                                <option selected>Pilih Anggota</option>
+                                                                            <select class="custom-select" name="anggota" id="anggota" required>
+                                                                                <option value="" disabled selected>Pilih Anggota</option>
                                                                                 <?php foreach ($members as $member) : ?>
                                                                                     <option value="<?= $member['id_anggota'] ?>">
                                                                                         <?= $member['kode_anggota'] . " " . $member['nama'] ?>
@@ -368,7 +368,7 @@ $transactions = mysqli_query(
                                                                         <div class="form-group">
                                                                             <label for="buku">Buku</label>
                                                                             <select class="custom-select" name="buku" id="buku">
-                                                                                <option selected>Pilih Buku</option>
+                                                                                <option value="" disabled selected>Pilih Buku</option>
                                                                                 <?php foreach ($books as $book) : ?>
                                                                                     <option value="<?= $book['id_buku'] ?>">
                                                                                         <?= $book['kode_buku'] . " " . $book['judul'] ?>
@@ -441,6 +441,8 @@ $transactions = mysqli_query(
                                                                     <!-- Modal -->
                                                                     <form action="borrow_crud.php" method="POST">
                                                                         <input type="hidden" name="id" value="<?= $transaction['id_transaksi'] ?>" />
+                                                                        <input type="hidden" name="id_buku" value="<?= $transaction['id_buku'] ?>" />
+
                                                                         <div class=" modal fade" id="deleteModal<?= $transaction['id_transaksi'] ?>" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                                                             <div class="modal-dialog">
                                                                                 <div class="modal-content">

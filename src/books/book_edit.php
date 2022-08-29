@@ -256,6 +256,18 @@ $book = mysqli_fetch_assoc($bookById);
                                                                 <label for="tahun">Tahun Rilis</label>
                                                                 <input type="text" class="form-control" id="tahun" name="tahun" value="<?= $book['tahun'] ?>" required>
                                                             </div>
+                                                            <div class="form-group">
+                                                                <label for="status">Status</label>
+                                                                <select class="custom-select" name="status" id="status">
+                                                                    <option value="Available" <?= $book['status'] == 'Available' ? 'selected' : '' ?>>Available</option>
+                                                                    <option value="Booked" <?= $book['status'] == 'Booked' ? 'selected' : '' ?>>
+                                                                        Booked
+                                                                    </option>
+                                                                    <option value="Archived" <?= $book['status'] == 'Archived' ? 'selected' : '' ?>>
+                                                                        Archived
+                                                                    </option>
+                                                                </select>
+                                                            </div>
 
                                                         </div>
                                                     </div>

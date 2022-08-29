@@ -122,8 +122,12 @@ if (isset($_POST['submit'])) {
 
                     // Move the temp image file to the images/ directory
                     move_uploaded_file($image_file["tmp_name"], "../../assets/img/profile_user/" . $uniqueNameImage);
-                    // delete the old image
-                    unlink($image_path_old);
+
+                    if ($image_old != '') {
+                        // delete the old image
+                        unlink($image_path_old);
+                    }
+
                     // save the data into the database
                     $sql = mysqli_query($conn, "UPDATE anggota SET nama = '$nama', email = '$email', telp = '$telp', foto = '$uniqueNameImage', alamat = '$alamat', jenis_kelamin = '$jenis_kelamin' WHERE id_anggota = '$id'");
                     header('location: members.php?success=update');
@@ -145,7 +149,7 @@ if (isset($_POST['submit'])) {
         $image = mysqli_fetch_assoc($sql);
         $image_file = "../../assets/img/profile_user/" . $image['foto'];
 
-        if (file_exists($image_file)) {
+        if ($image['foto'] != '') {
 
             // delete the image file
             unlink($image_file);

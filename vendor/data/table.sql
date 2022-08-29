@@ -36,23 +36,23 @@ VALUES
     ("Kimberley Waters","M-04","62-557-398-553","sed@gmail.com","Ap #126-9715 Montes, Avenue", "P"),
     ("Rhoda Wooten","M-05","72-456-868-878","pharetra.nam@gmail.com","Ap #129-2675 Sollicitudin St.", "P"),
     ("Ezra Boyle","M-06","23-830-461-756","rutrum.urna.nec@gmail.com","677-4726 Lectus Av.", "P"),
-    ("Noble Haney","M-07","82-485-213-382","magna.nam@gmail.com","6023 In, Rd.", "P"),
-    ("Gannon Mccray","M-08","48-418-680-298","aliquam.ultrices@gmail.com","Ap #876-398 Et, Rd.", "L"),
-    ("Olga Ochoa","M-09","56-698-568-752","nisi.cum@gmail.com","P.O. Box 569, 3408 Porttitor Rd.", "L"),
-    ("Thomas Burch","M-10","14-373-287-738","elit.curabitur@gmail.com","6390 Lacinia. Rd.", "L"),
-    ("Darius Mitchell","M-11","44-412-175-178","egestas.aliquam.fringilla@gmail.com","Ap #380-9452 Tristique Street", "L"),
-    ("Roanna Morrow","M-12","25-661-188-782","ac.libero@gmail.com","5221 Vel Ave", "L"),
-    ("Claudia Moss","M-13","26-645-158-682","commodo.ipsum@gmail.com","903-2076 Eros. Ave", "P"),
-    ("Dana Nunez","M-14","59-645-381-842","duis.dignissim.tempor@gmail.com","391-4424 Lorem, Rd.", "P"),
-    ("Wyatt Norman","M-15","88-588-018-119","adipiscing.non@gmail.com","664-8884 Porta Street", "L"),
-    ("Donna Owen","M-16","57-871-151-068","libero.donec@gmail.com","152-7365 Aliquam Road", "L"),
-    ("Lila Hatfield","M-17","66-028-667-583","suspendisse.ac.metus@gmail.com","187-8164 Sed St.", "P"),
-    ("Aileen Anderson","M-18","21-534-782-863","sem@gmail.com","Ap #998-4338 Molestie Road", "L"),
-    ("Zenia Bowen","M-19","54-525-900-481","mauris.nulla@gmail.com","365-4769 Ipsum. Avenue", "L"),
-    ("Hashim Padilla","M-20","88-861-639-543","lectus.a@gmail.com","6481 Morbi Ave", "L"),
-    ("Graham Hawkins","M-21","07-513-372-505","hymenaeos.mauris@gmail.com","239-164 Aliquet, St.", "L"),
-    ("Aileen Buchanan","M-23","16-366-432-814","eu.turpis@gmail.com","789-9022 Facilisis Street", "L"),
-    ("Willa Shepherd","M-24","76-174-939-831","primis.in.faucibus@gmail.com","P.O. Box 583, 5360 Consequat Rd.", "P");
+    ("Noble Haney","M-07","82-485-213-382","magna.nam@gmail.com","6023 In, Rd.", "P");
+    -- ("Gannon Mccray","M-08","48-418-680-298","aliquam.ultrices@gmail.com","Ap #876-398 Et, Rd.", "L"),
+    -- ("Olga Ochoa","M-09","56-698-568-752","nisi.cum@gmail.com","P.O. Box 569, 3408 Porttitor Rd.", "L"),
+    -- ("Thomas Burch","M-10","14-373-287-738","elit.curabitur@gmail.com","6390 Lacinia. Rd.", "L"),
+    -- ("Darius Mitchell","M-11","44-412-175-178","egestas.aliquam.fringilla@gmail.com","Ap #380-9452 Tristique Street", "L"),
+    -- ("Roanna Morrow","M-12","25-661-188-782","ac.libero@gmail.com","5221 Vel Ave", "L"),
+    -- ("Claudia Moss","M-13","26-645-158-682","commodo.ipsum@gmail.com","903-2076 Eros. Ave", "P"),
+    -- ("Dana Nunez","M-14","59-645-381-842","duis.dignissim.tempor@gmail.com","391-4424 Lorem, Rd.", "P"),
+    -- ("Wyatt Norman","M-15","88-588-018-119","adipiscing.non@gmail.com","664-8884 Porta Street", "L"),
+    -- ("Donna Owen","M-16","57-871-151-068","libero.donec@gmail.com","152-7365 Aliquam Road", "L"),
+    -- ("Lila Hatfield","M-17","66-028-667-583","suspendisse.ac.metus@gmail.com","187-8164 Sed St.", "P"),
+    -- ("Aileen Anderson","M-18","21-534-782-863","sem@gmail.com","Ap #998-4338 Molestie Road", "L"),
+    -- ("Zenia Bowen","M-19","54-525-900-481","mauris.nulla@gmail.com","365-4769 Ipsum. Avenue", "L"),
+    -- ("Hashim Padilla","M-20","88-861-639-543","lectus.a@gmail.com","6481 Morbi Ave", "L"),
+    -- ("Graham Hawkins","M-21","07-513-372-505","hymenaeos.mauris@gmail.com","239-164 Aliquet, St.", "L"),
+    -- ("Aileen Buchanan","M-23","16-366-432-814","eu.turpis@gmail.com","789-9022 Facilisis Street", "L"),
+    -- ("Willa Shepherd","M-24","76-174-939-831","primis.in.faucibus@gmail.com","P.O. Box 583, 5360 Consequat Rd.", "P");
 
 
 -- tabel buku
@@ -64,6 +64,7 @@ CREATE TABLE `buku` (
     `pengarang` varchar(50) NOT NULL,
     `penerbit` varchar(50) NOT NULL,
     `tahun` varchar(4) NOT NULL,
+    'status' enum('Ready','Booked') NOT NULL DEFAULT 'Ready',
     PRIMARY KEY (`id_buku`)
 ) ENGINE=InnoDB;
 
@@ -86,12 +87,12 @@ CREATE TABLE `transaksi` (
     `tgl_kembali_asli` date DEFAULT NULL,
     PRIMARY KEY (`id_transaksi`),
     CONSTRAINT `fk_transaksi_anggota` FOREIGN KEY (id_anggota)
-    REFERENCES anggota (id_anggota),
-    -- ON UPDATE CASCADE ON DELETE SET NULL,
+    REFERENCES anggota (id_anggota)
+    ON DELETE CASCADE ON UPDATE RESTRICT,
 
     CONSTRAINT `fk_transaksi_buku` FOREIGN KEY (id_buku)
     REFERENCES buku (id_buku)
-    -- ON UPDATE CASCADE ON DELETE SET NULL
+    ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE=InnoDB;
 
 -- data tabel transaksi

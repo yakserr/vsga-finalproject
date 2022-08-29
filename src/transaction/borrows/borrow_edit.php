@@ -17,7 +17,7 @@ $transactionById = mysqli_query($conn, "SELECT * FROM transaksi WHERE id_transak
 $transaction = mysqli_fetch_assoc($transactionById);
 
 // book info
-$books = mysqli_query($conn, "SELECT * FROM buku");
+$books = mysqli_query($conn, "SELECT * FROM buku WHERE status = 'Available' OR id_buku = '$transaction[id_buku]'");
 
 // members info
 $member = mysqli_query($conn, "SELECT * FROM anggota WHERE id_anggota = '$transaction[id_anggota]'");

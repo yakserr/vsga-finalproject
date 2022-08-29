@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
         $sql = mysqli_query($conn, "SELECT id_buku as id FROM buku ORDER BY id_buku DESC LIMIT 1");
         $row = mysqli_fetch_assoc($sql);
         $id = $row['id'] + 1;
-        $kode_buku = 'M-' . $id;
+        $kode_buku = 'B-' . $id;
 
         // save the data into the database
         $sql = mysqli_query($conn, "INSERT INTO buku (kode_buku, judul, keterangan, pengarang, penerbit, tahun) VALUES ( '$kode_buku' ,'$judul', '$keterangan', '$pengarang', '$penerbit', '$tahun')");
@@ -50,9 +50,10 @@ if (isset($_POST['submit'])) {
         $pengarang = $_POST['pengarang'];
         $penerbit = $_POST['penerbit'];
         $tahun = $_POST['tahun'];
+        $status = $_POST['status'];
 
         // save the data into the database
-        $sql = mysqli_query($conn, "UPDATE buku SET judul = '$judul', keterangan = '$keterangan', pengarang = '$pengarang', penerbit = '$penerbit', tahun = '$tahun' WHERE id_buku = '$id'");
+        $sql = mysqli_query($conn, "UPDATE buku SET judul = '$judul', keterangan = '$keterangan', pengarang = '$pengarang', penerbit = '$penerbit', tahun = '$tahun', status = '$status' WHERE id_buku = '$id'");
 
         // if the data is saved into the database
         if ($sql) {

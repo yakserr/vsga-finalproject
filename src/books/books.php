@@ -375,6 +375,7 @@ $books = mysqli_query($conn, "SELECT * FROM buku LIMIT $start , $limit");
                                                         <th>Pengarang</th>
                                                         <th>Penerbit</th>
                                                         <th>Tahun Rilis</th>
+                                                        <th>Status</th>
                                                         <th>Aksi</th>
                                                     </tr>
                                                 </thead>
@@ -388,6 +389,15 @@ $books = mysqli_query($conn, "SELECT * FROM buku LIMIT $start , $limit");
                                                             <td><?= $book['pengarang'] ?></td>
                                                             <td><?= $book['penerbit'] ?></td>
                                                             <td><?= $book['tahun'] ?></td>
+                                                            <td>
+                                                                <?php if ($book['status'] == 'Available') : ?>
+                                                                    <span class="badge badge-success">Available</span>
+                                                                <?php elseif ($book['status'] == 'Booked') : ?>
+                                                                    <span class="badge badge-danger">Booked</span>
+                                                                <?php else : ?>
+                                                                    <span class="badge badge-warning">Archived</span>
+                                                                <?php endif; ?>
+                                                            </td>
                                                             <td>
                                                                 <div class="d-flex flex-row">
                                                                     <button type="button" class="btn btn-primary btn-sm mr-1">
