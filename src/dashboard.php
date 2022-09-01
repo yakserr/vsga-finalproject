@@ -167,7 +167,7 @@ if (isset($_SESSION['is_logged_in']) === false) {
                             <img width="35" src="../assets/img/default.png" alt="">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">My Profile</a>
+                            <a class="dropdown-item" href="auth/account.php">My Profile</a>
                             <a class="dropdown-item" href="auth/logout.php">Logout</a>
                         </div>
                     </li>
