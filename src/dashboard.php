@@ -172,8 +172,8 @@ if (isset($_SESSION['is_logged_in']) === false) {
                         </div>
                     </li>
                 </div>
-                <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 mt-3">
 
+                <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 mt-3">
                     <div class="greetings">
                         <p class="text-muted m-0">Welcome <span class="font-weight-bolder"><?= $_SESSION['nama'] ?></span></p>
                         <h3 class="font-weight-bolder">Analytical Dashboard</h3>
