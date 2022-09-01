@@ -30,8 +30,6 @@ if (isset($_POST['submit'])) {
         $data = mysqli_fetch_assoc($admin_sql);
         $_SESSION['id'] = $data['id_admin'];
         $_SESSION['nama'] = $data['nama'];
-        $_SESSION['email'] = $data['email'];
-        $_SESSION['foto'] = $data['foto'];
         $_SESSION['is_logged_in'] = true;
 
         // redirect to dashboard page
