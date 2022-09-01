@@ -21,7 +21,7 @@ Buatlah SIM Perpus dengan modul sebagai berikut;
 
 ## Final Project Spec DB
 
-    |-- anggota
+    |-- admin
         |-- id_admin int(11) auto_increment
         |-- nama varchar(50)
         |-- email varchar(75)
@@ -45,6 +45,7 @@ Buatlah SIM Perpus dengan modul sebagai berikut;
         |-- pengarang varchar(50)
         |-- penerbit varchar (50)
         |-- tahun YEAR
+        |-- status enum('Available', 'Booked', 'Archived')
     |-- transaksi
         |-- id_transaksi int(11) auto_increment
         |-- id_anggota int(11)
@@ -89,7 +90,7 @@ Buatlah SIM Perpus dengan modul sebagai berikut;
 | config.php | File containing configuration information and connection |
 | helper.php | File containing Function                                 |
 
-## resources
+## Additional Resources
 
 <https://datatables.net/>
 

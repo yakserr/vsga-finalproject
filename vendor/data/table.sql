@@ -36,9 +36,9 @@ VALUES
     ("Kimberley Waters","M-04","62-557-398-553","sed@gmail.com","Ap #126-9715 Montes, Avenue", "P"),
     ("Rhoda Wooten","M-05","72-456-868-878","pharetra.nam@gmail.com","Ap #129-2675 Sollicitudin St.", "P"),
     ("Ezra Boyle","M-06","23-830-461-756","rutrum.urna.nec@gmail.com","677-4726 Lectus Av.", "P"),
-    ("Noble Haney","M-07","82-485-213-382","magna.nam@gmail.com","6023 In, Rd.", "P");
-    -- ("Gannon Mccray","M-08","48-418-680-298","aliquam.ultrices@gmail.com","Ap #876-398 Et, Rd.", "L"),
-    -- ("Olga Ochoa","M-09","56-698-568-752","nisi.cum@gmail.com","P.O. Box 569, 3408 Porttitor Rd.", "L"),
+    ("Noble Haney","M-07","82-485-213-382","magna.nam@gmail.com","6023 In, Rd.", "P"),
+    ("Gannon Mccray","M-08","48-418-680-298","aliquam.ultrices@gmail.com","Ap #876-398 Et, Rd.", "L"),
+    ("Olga Ochoa","M-09","56-698-568-752","nisi.cum@gmail.com","P.O. Box 569, 3408 Porttitor Rd.", "L");
     -- ("Thomas Burch","M-10","14-373-287-738","elit.curabitur@gmail.com","6390 Lacinia. Rd.", "L"),
     -- ("Darius Mitchell","M-11","44-412-175-178","egestas.aliquam.fringilla@gmail.com","Ap #380-9452 Tristique Street", "L"),
     -- ("Roanna Morrow","M-12","25-661-188-782","ac.libero@gmail.com","5221 Vel Ave", "L"),
