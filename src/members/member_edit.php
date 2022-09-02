@@ -200,7 +200,7 @@ $member = mysqli_fetch_assoc($memberById);
                             <img width="35" src="../../assets/img/default.png" alt="">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">My Profile</a>
+                            <a class="dropdown-item" href="../auth/account.php">My Profile</a>
                             <a class="dropdown-item" href="../auth/logout.php">Logout</a>
                         </div>
                     </li>
@@ -214,7 +214,7 @@ $member = mysqli_fetch_assoc($memberById);
                     </div>
                 </div>
 
-                <!-- table -->
+                <!-- Table -->
                 <div class="row">
                     <!-- column -->
                     <div class="col-12">
@@ -309,6 +309,9 @@ $member = mysqli_fetch_assoc($memberById);
                     </div>
                     <!-- End Body -->
                 </div>
+                <!-- End Table -->
+
+                <!-- End Body -->
 
             </main>
             <!-- End Content -->
@@ -316,12 +319,11 @@ $member = mysqli_fetch_assoc($memberById);
         <!-- End Page Content -->
 
         <!-- End Page Container -->
-    </div>
 
-    <!-- Bootstrap CDN JS & Jquery -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-    <script src="../../assets/js/app.js"></script>
+        <!-- Bootstrap CDN JS & Jquery -->
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+        <script src="../../assets/js/app.js"></script>
 </body>
 
 </html>
