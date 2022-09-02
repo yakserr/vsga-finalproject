@@ -14,26 +14,37 @@ if (isset($_POST['submit'])) {
 
     // get the email and password from the form
     $email = $_POST['email'];
-    $password = md5($_POST['password']); // the password encrypted with md5
+    $password = ($_POST['password']);
 
-    // check if the email and password is exist/valid in database
+    $hash_password = password_hash($password, PASSWORD_DEFAULT);
 
-    $admin_sql = mysqli_query($conn, "SELECT * FROM admin  WHERE email = '$email' and password = '$password'");
-    $admin = mysqli_num_rows($admin_sql);
+    // password verify
+    $sql = mysqli_query($conn, "SELECT * FROM admin WHERE email = '$email'");
+    $data = mysqli_fetch_assoc($sql);
+    $hash_password_db = $data['password'];
 
-    // validate the email and password
-    if (!$admin) {
 
-        header("location: $_SERVER[PHP_SELF]?error=login");
+    // validate the email
+    if (!$data['email']) {
+
+        header("location: login.php?error=login");
     } else {
-        // session data
-        $data = mysqli_fetch_assoc($admin_sql);
-        $_SESSION['id'] = $data['id_admin'];
-        $_SESSION['nama'] = $data['nama'];
-        $_SESSION['is_logged_in'] = true;
 
-        // redirect to dashboard page
-        header("location:../dashboard.php");
+        // validate the password
+        if (password_verify($password, $hash_password_db)) {
+
+            // set session
+            // session data
+            $_SESSION['id'] = $data['id_admin'];
+            $_SESSION['nama'] = $data['nama'];
+            $_SESSION['is_logged_in'] = true;
+
+
+            // redirect to dashboard
+            header("location:../dashboard.php");
+        } else {
+            header("location: login.php?error=login");
+        }
     }
 }
 ?>
