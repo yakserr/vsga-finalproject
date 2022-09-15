@@ -1,7 +1,7 @@
 # Final Project
 
 Website link :
-<https://perpusvsga.000webhostapp.com/>
+<https://perpusvsgaku.000webhostapp.com/src/dashboard.php/>
 
 email : admin@gmail.com
 password : password
@@ -93,5 +93,3 @@ Buatlah SIM Perpus dengan modul sebagai berikut;
 ## Additional Resources
 
 <https://datatables.net/>
-
-<https://www.youtube.com/watch?v=qVSa5v6_nuA&ab_channel=Richard%27sLab>
