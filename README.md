@@ -1,7 +1,7 @@
 # Final Project
 
 Website link :
-<https://perpusvsgaku.000webhostapp.com/src/dashboard.php/>
+<https://perpusvsgaku.000webhostapp.com/>
 
 email : admin@gmail.com
 password : password
